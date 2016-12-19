@@ -1,0 +1,79 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.n550j.myapplication.fragments.FragmentProyecto">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="15dp"
+        android:paddingRight="12dp">
+
+        <TextView
+            android:text="@string/informacion_del_proyecto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:id="@+id/info_proyecto" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:layout_marginTop="12dp"
+            android:id="@+id/nombre_proyecto"
+            android:hint="@string/nombre_del_proyecto"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:layout_marginTop="12dp"
+            android:id="@+id/direccion_proyecto"
+            android:hint="@string/direccion_del_proyecto"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:layout_marginTop="12dp"
+            android:id="@+id/ciudad_proyecto"
+            android:hint="@string/ciudad_del_proyecto"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:layout_marginTop="12dp"
+            android:id="@+id/editText4"
+            android:hint="@string/numero_contrato"/>
+
+        <Button
+            android:text="@string/cargar_archivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button2"
+            android:layout_marginTop="50dp"
+            style="@style/Widget.AppCompat.Button.Colored" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_gravity="bottom|end"
+            app:fabSize="mini"
+            app:srcCompat="@android:drawable/ic_menu_save"
+            android:id="@+id/floatingActionButton" />
+
+    </LinearLayout>
+
+</FrameLayout>
