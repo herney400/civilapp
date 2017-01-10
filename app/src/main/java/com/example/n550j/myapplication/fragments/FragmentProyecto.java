@@ -62,22 +62,22 @@ public class FragmentProyecto extends Fragment {
         buttonCargarArchvo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageBrowse();
+                ChooserBrowse();
             }
         });
         floatingActionButton = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageUpload(filePath);
+                FileUpload(filePath);
             }
         });
         // Inflate the layout for this fragment
         return view;
     }
 
-
-    private void imageBrowse() {
+    /*metodo encargado de abrir un File Chooser que permite elegir el archivo excel */
+    private void ChooserBrowse() {
         Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -86,7 +86,8 @@ public class FragmentProyecto extends Fragment {
         startActivityForResult(intent.createChooser(intent,"selecciona un archivo"), FILE_SELECT_CODE);
     }
 
-    private void imageUpload(final String imagePath) {
+    /*Metodo qeu utiliza volley para cargar el archivo excel al server*/
+    private void FileUpload(final String imagePath) {
         Log.e("_URL",""+imagePath);
         RequestQueue queue= Volley.newRequestQueue(getContext());
 
@@ -134,16 +135,6 @@ public class FragmentProyecto extends Fragment {
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
-          /*  if(requestCode == PICK_IMAGE_REQUEST){
-                Uri picUri = data.getData();
-
-                filePath = getPath(picUri);
-
-
-              //  imageView.setImageURI(picUri);
-
-            }*/
-
         }
 
     }
@@ -159,11 +150,11 @@ public class FragmentProyecto extends Fragment {
         cursor.close();
         return result;
     }*/
+    /*Metodo para obtener el path del archivo a enviar */
     public static String getPath(Context context, Uri uri) throws URISyntaxException {
         if ("content".equalsIgnoreCase(uri.getScheme())) {
             String[] projection = { "_data" };
             Cursor cursor = null;
-
             try {
                 cursor = context.getContentResolver().query(uri, projection, null, null, null);
                 int column_index = cursor.getColumnIndexOrThrow("_data");
@@ -177,7 +168,6 @@ public class FragmentProyecto extends Fragment {
         else if ("file".equalsIgnoreCase(uri.getScheme())) {
             return uri.getPath();
         }
-
         return null;
     }
 
