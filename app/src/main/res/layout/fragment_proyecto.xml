@@ -61,7 +61,7 @@
             android:text="@string/cargar_archivo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button2"
+            android:id="@+id/buttonCargarArchivo"
             android:layout_marginTop="50dp"
             style="@style/Widget.AppCompat.Button.Colored" />
 
@@ -69,6 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:layout_marginTop="70dp"
             android:layout_gravity="bottom|end"
             app:fabSize="mini"
             app:srcCompat="@android:drawable/ic_menu_save"
