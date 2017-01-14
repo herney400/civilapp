@@ -7,74 +7,87 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="15dp"
-        android:paddingRight="12dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:text="@string/informacion_del_proyecto"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:id="@+id/info_proyecto" />
+            android:orientation="vertical" >
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:layout_marginTop="12dp"
-            android:id="@+id/nombre_proyecto"
-            android:hint="@string/nombre_del_proyecto"/>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:layout_marginTop="12dp"
-            android:id="@+id/direccion_proyecto"
-            android:hint="@string/direccion_del_proyecto"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/projectName"
+                    android:id="@+id/editProjectName"/>
+            </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:layout_marginTop="12dp"
-            android:id="@+id/ciudad_proyecto"
-            android:hint="@string/ciudad_del_proyecto"/>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:layout_marginTop="12dp"
-            android:id="@+id/editText4"
-            android:hint="@string/numero_contrato"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/contracNumber"
+                    android:id="@+id/editContractNumber"/>
 
-        <Button
-            android:text="@string/cargar_archivo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonCargarArchivo"
-            android:layout_marginTop="50dp"
-            style="@style/Widget.AppCompat.Button.Colored" />
+            </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.FloatingActionButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:layout_marginTop="70dp"
-            android:layout_gravity="bottom|end"
-            app:fabSize="mini"
-            app:srcCompat="@android:drawable/ic_menu_save"
-            android:id="@+id/floatingActionButton" />
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    </LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/cityProject"
+                    android:id="@+id/editcityProject"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/directionProject"
+                    android:id="@+id/editdirectionProject"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:text="@string/cargar_archivo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonCargarArchivo"
+                android:layout_marginTop="50dp"
+                style="@style/Widget.AppCompat.Button.Colored" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:layout_marginTop="70dp"
+                android:layout_gravity="bottom|end"
+                app:fabSize="mini"
+                app:srcCompat="@android:drawable/ic_menu_save"
+                android:id="@+id/floatingActionButton" />
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
 </FrameLayout>

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.n550j.myapplication.fragments.FragmentCurvaSdeCostos;
 import com.example.n550j.myapplication.fragments.FragmentMisProyectos;
 import com.example.n550j.myapplication.fragments.FragmentProyecto;
 
@@ -75,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
                                 fragment = new FragmentProyecto();
                                 fragmentTransaction = true;
                                 break;
+                            case R.id.menu_seccion_4:
+                                fragment = new FragmentCurvaSdeCostos();
+                                fragmentTransaction = true;
+                                break;
+
                             case R.id.menu_opcion_1:
                                 Log.i("NavigationView", "Pulsada opción 1");
                                 break;

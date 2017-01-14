@@ -1,11 +1,42 @@
 <resources>
+
+    <!-- Strings related a homeActivity-->
+    <string name="emailHome">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="button_start_sesion">Iniciar Sesiòn</string>
+    <string name="create_count">Crear cuenta</string>
+
+    <!-- Strings related a CreateCount-->
+    <string name="passwordCreate">Contraseña</string>
+    <string name="emaild">Correo</string>
+    <string name="user">Usuario</string>
+    <string name="passwordRepetir">Repetir Contraseña</string>
+    <string name="apellido">Apellido</string>
+    <string name="nameUser">Nombre</string>
+    <string name="buttonAceptar">Aceptar</string>
+    <string name="buttonCancelar">Cancelar</string>
+
+    <!-- Strings related a FragmentProject-->
+
+    <string name="projectName">Nombre Proyecto</string>
+    <string name="contracNumber">Numero Contrato</string>
+    <string name="cityProject">Ciudad</string>
+    <string name="directionProject">Direccion proyectoto</string>
+
+
     <string name="app_name">Civilapp</string>
     <string name="title_mainactivity">Main Activity</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to sections -->
-    <string name="seccion_1">Proyecto</string>
-    <string name="seccion_2">Mis proyectos</string>
-    <string name="seccion_3">Seccion 3</string>
+    <string name="seccion_1">Cargar Proyecto</string>
+    <string name="seccion_2">Ingresar avance y costo real</string>
+    <string name="seccion_3">Informe por periodo</string>
+    <string name="seccion_4">Curva S de costos</string>
+    <string name="seccion_5">Indices de desempeño</string>
+    <string name="seccion_6">Pronostico del costo final del proyecto</string>
+    <string name="seccion_7">Causale de no cumplimiento</string>
+    <string name="seccion_8">Generar reporte pdf</string>
+    <string name="seccion_9">Cerrar sesion</string>
 
     <string name="action_settings">Settings</string>
     <string name="opcion_1">opcion_1</string>
@@ -32,8 +63,7 @@
     <string name="nombre_del_proyecto">Nombre del proyecto</string>
     <string name="direccion_del_proyecto">Direcciòn del proyecto</string>
     <string name="ciudad_del_proyecto">Ciudad del proyecto</string>
-    <string name="numero_contrato">Nùmero del contrato</string>
-
+    <string name="number_contract">Nùmero del contrato</string>
     <string name="cargar_archivo">Cargar Archivo</string>
 
 
