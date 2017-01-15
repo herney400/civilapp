@@ -102,11 +102,11 @@ public class CreateCountActivity extends AppCompatActivity {
 
             }
         });
-
+        queue.add(request);
     }
 
     public static String format(Date fecha) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         return dateFormat.format(fecha);
     }
 }

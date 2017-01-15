@@ -69,7 +69,7 @@ public class homeActivity extends AppCompatActivity {
         buttonStartSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //login();
+                login();
                 startAcitivity("nada", "nada", "nada");
             }
         });

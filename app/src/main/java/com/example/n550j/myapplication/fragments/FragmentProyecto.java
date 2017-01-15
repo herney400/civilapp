@@ -88,7 +88,7 @@ public class FragmentProyecto extends Fragment {
             }
         });
 
-        BarChart chart;
+        //BarChart chart;
         // Inflate the layout for this fragment
         return view;
     }
@@ -118,7 +118,7 @@ public class FragmentProyecto extends Fragment {
         Date today=new  Date();
         String URL = Constantes.URL_CREATE_PROJECT;
         try {
-            jsonObjCreateProject.put("nombre_projecto",strNmaeProject);
+            jsonObjCreateProject.put("nombre_proyecto",strNmaeProject);
             jsonObjCreateProject.put("idusuario",idUser);
             jsonObjCreateProject.put("numero_contrato", strNumberProject);
             jsonObjCreateProject.put("ciudad", strCity);
@@ -139,14 +139,10 @@ public class FragmentProyecto extends Fragment {
             }}, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
                 Log.e("ERROR",""+error);
-
             }
         });
-/*
-
-             */
+        queue.add(request);
     }
     public  void readFilePreferences(){
 
@@ -154,9 +150,7 @@ public class FragmentProyecto extends Fragment {
         userName = sharedPreferences.getString("userName","no hay user");
         idUser   = sharedPreferences.getString("id","id");
         email    = sharedPreferences.getString("email", "email");
-
     }
-
 
     /*metodo encargado de abrir un File Chooser que permite elegir el archivo excel */
     private void ChooserBrowse() {
@@ -244,7 +238,7 @@ public class FragmentProyecto extends Fragment {
     }
 
     public static String format(Date fecha) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         return dateFormat.format(fecha);
     }
 
