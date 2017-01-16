@@ -29,7 +29,7 @@
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to sections -->
     <string name="seccion_1">Cargar Proyecto</string>
-    <string name="seccion_2">Ingresar avance y costo real</string>
+    <string name="seccion_2">Mis proyectos</string>
     <string name="seccion_3">Informe por periodo</string>
     <string name="seccion_4">Curva S de costos</string>
     <string name="seccion_5">Indices de desempeño</string>
@@ -68,5 +68,5 @@
 
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">hello_blank_fragment</string>
 </resources>

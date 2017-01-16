@@ -1,6 +1,7 @@
 package com.example.n550j.myapplication.fragments;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
@@ -70,8 +72,23 @@ public class FragmentCurvaSdeCostos extends Fragment {
                 entries.add(new Entry(9f, 5));
                 entries.add(new Entry(10f, 6));
 
-        LineDataSet dataset=new LineDataSet(entries,"dd");
+        ArrayList entries2 = new ArrayList<String>();
+        entries2.add(new Entry(0, 0));
+        entries2.add(new Entry(10f, 1));
+        entries2.add(new Entry(8f, 2));
+        entries2.add(new Entry(6f, 3));
+        entries2.add(new Entry(8f, 4));
+        entries2.add(new Entry(7f, 5));
+        entries2.add(new Entry(10f, 6));
 
+        LineDataSet dataset=new LineDataSet(entries,"dd");
+        dataset.setColor(Color.BLUE);
+        LineDataSet dataset2=new LineDataSet(entries2,"jj");
+
+
+        dataset.setDrawCubic(true);
+        dataset2.setDrawCubic(true);
+        ArrayList <ILineDataSet> lineDataSets=new ArrayList<>();
         ArrayList labels = new ArrayList<String>();
 
                 labels.add("Periodo 0");
@@ -81,14 +98,19 @@ public class FragmentCurvaSdeCostos extends Fragment {
                 labels.add("Periodo 4");
                 labels.add("Periodo 5");
                 labels.add("Periodo 6");
-
-        LineData data=new LineData(labels,dataset);
+        lineDataSets.add(dataset);
+        lineDataSets.add(dataset2);
+       /* LineData data=new LineData(labels,dataset);
+        LineData data2=new LineData(labels,dataset2);
+*/
 
         lineChart.setDoubleTapToZoomEnabled(true);
         lineChart.setDrawBorders(true);
         
 
-        lineChart.setData(data);
+        lineChart.setData(new LineData(labels,lineDataSets));
+      //  lineChart.setData(data2);
+
         lineChart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

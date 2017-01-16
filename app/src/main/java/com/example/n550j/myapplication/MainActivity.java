@@ -15,6 +15,7 @@ import android.view.MenuItem;
 
 import com.example.n550j.myapplication.fragments.FragmentCurvaSdeCostos;
 import com.example.n550j.myapplication.fragments.FragmentMisProyectos;
+import com.example.n550j.myapplication.fragments.FragmentProjects;
 import com.example.n550j.myapplication.fragments.FragmentProyecto;
 
 public class MainActivity extends AppCompatActivity {
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                                 fragmentTransaction = true;
                                 break;
                             case R.id.menu_seccion_2:
-                                fragment = new FragmentMisProyectos();
+                                fragment = new FragmentProjects();
                                 fragmentTransaction = true;
                                 break;
                             case R.id.menu_seccion_3:

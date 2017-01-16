@@ -1,6 +1,10 @@
 package com.example.n550j.myapplication;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.icu.text.DateFormat;
 import android.icu.util.Calendar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +32,7 @@ public class CreateCountActivity extends AppCompatActivity {
       EditText editTextNameUser, editTextLastName,editTextUser,editTextEmail,editTextPassword,editTextRepetirpaswor;
       String    strNameUser, strLasName,strUser, strEmail,strPassword,strRepetirPassword;
       Button buttonCancelar, buttonAceptar;
-
+Context context=this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +93,20 @@ public class CreateCountActivity extends AppCompatActivity {
         JsonRequest request = new JsonObjectRequest(Request.Method.POST, URL, jsonObjCreateCount, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                try {
 
-                /*Aqui va la lectura del Json que retorne Lucho*/
+                    Boolean status=response.getBoolean("Status");
+                    String message=response.getString("Message");
+                    if(status){
+                        dialogAlertaP(message,context,"Bienvenido :)");
+                    }else{
+                        dialogAlertaP(message,context,"No pudimos crea  tu cuenta :(");
+                    }
 
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
 
             }}, new Response.ErrorListener() {
@@ -108,5 +123,18 @@ public class CreateCountActivity extends AppCompatActivity {
     public static String format(Date fecha) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         return dateFormat.format(fecha);
+    }
+    public void dialogAlertaP(String error, Context context, String title) {
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(error);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Aceptar",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        alertDialog.show();
     }
 }
