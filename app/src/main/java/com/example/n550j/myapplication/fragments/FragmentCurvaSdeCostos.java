@@ -28,7 +28,7 @@ import java.util.ArrayList;
  */
 public class FragmentCurvaSdeCostos extends Fragment {
 
-  LineChart barChart;
+
     ArrayList<BarEntry> BARENTRY ;
     ArrayList<String> BarEntryLabels ;
     BarDataSet Bardataset ;
@@ -41,6 +41,7 @@ public class FragmentCurvaSdeCostos extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        LineChart barChart;
         View view= inflater.inflate(R.layout.fragment_fragment_curva_sde_costos, container, false);
         barChart= (LineChart) view.findViewById(R.id.chart1);
 

@@ -35,5 +35,6 @@ dependencies {
     compile 'com.google.android.gms:play-services-appindexing:9.8.0'
     compile 'com.github.PhilJay:MPAndroidChart:v2.2.4'
     compile 'com.android.support:recyclerview-v7:25.0.+'
+    compile 'de.codecrafters.tableview:tableview:2.4.1'
     testCompile 'junit:junit:4.12'
 }

@@ -37,15 +37,11 @@ public class FragmentMisProyectos extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_mis_proyectos, container, false);
       //  toolbar = (Toolbar)view.findViewById(R.id.toolbar);
        // ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        Spinner spinner= (Spinner) view.findViewById(R.id.spinner);
-
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -53,16 +49,20 @@ public class FragmentMisProyectos extends Fragment {
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout)view.findViewById(R.id.tabs);
+
         tabLayout.setupWithViewPager(viewPager);
         // Inflate the layout for this fragment
         return view;
     }
     private void setupViewPager(ViewPager viewPager) {
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-        adapter.addFragment(new OneFragment(), "INFORME POR PERIODO");
-        adapter.addFragment(new OneFragment(), "cURVA S DE COSTOS");
-        adapter.addFragment(new OneFragment(), "INDICE DE DESEMPEÑO");
+        adapter.addFragment(new FragmentAvanceCostoReal(), "AVANCE COSTO REAL");
+        adapter.addFragment(new FragmentCurvaSdeCostos(), "INFORME POR PERIODO");
+        adapter.addFragment(new FragmentCurvaSdeCostos(), "INDICE DE DESEMPEÑO");
+
         viewPager.setAdapter(adapter);
+
     }
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();

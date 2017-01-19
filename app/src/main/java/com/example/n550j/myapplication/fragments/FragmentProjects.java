@@ -3,13 +3,16 @@ package com.example.n550j.myapplication.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.n550j.myapplication.R;
 
@@ -39,8 +42,6 @@ public class FragmentProjects extends Fragment {
 
 
     private OnFragmentInteractionListener mListener;
-
-
     private RecyclerView recyclerViewProject;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -77,13 +78,10 @@ public class FragmentProjects extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
 
          // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_projects, container, false);
-
-
 
         List items= new ArrayList();
         items.add(new Project(12,12,"proyecto 1", "1221","Cali","carre 94"));
@@ -93,16 +91,14 @@ public class FragmentProjects extends Fragment {
         items.add(new Project(12,12,"proyecto 5", "1221","Florida","carre 94"));
 
         recyclerViewProject= (RecyclerView) view.findViewById(R.id.recycler_proyect);
-       recyclerViewProject.setHasFixedSize(true);
+        recyclerViewProject.setHasFixedSize(true);
 
         mLayoutManager=new LinearLayoutManager(getContext());
         recyclerViewProject.setLayoutManager(mLayoutManager);
 
-        mAdapter=new RecyclerAdapter(items);
-        recyclerViewProject.setAdapter(mAdapter);
-
-
-
+       // mAdapter=new RecyclerAdapter(items);
+       // recyclerViewProject.setAdapter(mAdapter);
+        startRecyclerView(items, view);
         return view;
 
     }
@@ -113,6 +109,22 @@ public class FragmentProjects extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
+
+    public  void startRecyclerView(List<Project> listProjects, final View view){
+
+
+
+        recyclerViewProject.setAdapter(new RecyclerAdapter(listProjects,new RecyclerAdapter.OnItemClickListener(){
+            @Override
+            public void onItemClick(Project item) {
+            FragmentMisProyectos fragment=new FragmentMisProyectos();
+             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+            }
+        },getContext() ));
+    }
+
+
 
    /* @Override
     public void onAttach(Context context) {
@@ -146,4 +158,8 @@ public class FragmentProjects extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 }

@@ -104,7 +104,6 @@ public class homeActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     if(response.getBoolean("type")){
-
                        JSONObject jo= response.getJSONObject("data");
                        String name= jo.getString("nombre");
                        String idUser=  jo.getString("idusuario");
