@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar appbar;
     private DrawerLayout drawerLayout;
     private NavigationView navView;
+
+    String id,email,userName;
 /*Un cambio*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+
 
         /*
         //Eventos del Drawer Layout
@@ -94,16 +97,21 @@ public class MainActivity extends AppCompatActivity {
                             getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.content_frame, fragment)
                                     .commit();
-
                             menuItem.setChecked(true);
                             getSupportActionBar().setTitle(menuItem.getTitle());
                         }
 
                         drawerLayout.closeDrawers();
-
                         return true;
                     }
                 });
+    }
+
+
+    public void obtenerDatosdeUsuario(){
+       userName = getIntent().getExtras().getString("userName");
+       id       = getIntent().getExtras().getString("id");
+       email    = getIntent().getExtras().getString("email");
     }
 
     @Override

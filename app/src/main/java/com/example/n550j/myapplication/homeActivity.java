@@ -140,9 +140,10 @@ public class homeActivity extends AppCompatActivity {
          editor.putString("email", email);
          editor.commit();
 
-
          Intent intent = new Intent(this, MainActivity.class);
-         //intent.putExtra("emailuser", stringemail);
+         intent.putExtra("emailuser", userName);
+         intent.putExtra("id",idUser);
+         intent.putExtra("email",email);
          startActivity(intent);
      }
 

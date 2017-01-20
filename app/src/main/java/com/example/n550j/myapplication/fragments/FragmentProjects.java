@@ -3,6 +3,7 @@ package com.example.n550j.myapplication.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -49,6 +50,8 @@ public class FragmentProjects extends Fragment {
     public FragmentProjects() {
         // Required empty public constructor
     }
+
+
 
     /**
      * Use this factory method to create a new instance of
@@ -156,6 +159,11 @@ public class FragmentProjects extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package Adapters;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +51,14 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
                 Toast.makeText(context,actividads.get(position).getNombreActividad()+"",Toast.LENGTH_LONG).show();
             }
         });
+        actividadesViewHolder.btn_finalizar.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,"Finalizada :"+actividads.get(position).getNombreActividad()+"",Toast.LENGTH_LONG).show();
+
+            }
+        });
 
 
     }
@@ -86,6 +95,8 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
 
 
             btn_actualizar= (Button) itemview.findViewById(R.id.btn_actualizar);
+            btn_finalizar= (Button) itemview.findViewById(R.id.btn_finalizar);
+
             //  itemview.setOnClickListener(this);
         }
         /**   @Override

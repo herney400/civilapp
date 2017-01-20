@@ -80,7 +80,7 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_periodos.setAdapter(dataAdapter);
 
-       startRecyclerView(actividades,view);
+        startRecyclerView(actividades,view);
         return view;
     }
     public  void startRecyclerView(List<Actividad> actividads, final View view){

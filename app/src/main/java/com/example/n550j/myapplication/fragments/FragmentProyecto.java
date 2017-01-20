@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -103,15 +104,15 @@ public class FragmentProyecto extends Fragment {
 
 
     }
-    public  void getValue(){
+    public  void getValue(String urlFile){
         strNmaeProject=editTextNameProject.getText().toString();
         strNumberProject=editTextNumbreProject.getText().toString();
         strCity =editTextCity.getText().toString();
         strDirection=editTextDirection.getText().toString();
-        createProject(strNmaeProject,strNumberProject,strCity,strDirection);
+        createProject(strNmaeProject,strNumberProject,strCity,strDirection, urlFile);
     }
 
-    public void createProject(String strNmaeProject,String strNumberProject, String strCity,String strDirection){
+    public void createProject(String strNmaeProject,String strNumberProject, String strCity,String strDirection, String url){
 
         JSONObject jsonObjCreateProject = new JSONObject();
         RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -124,6 +125,7 @@ public class FragmentProyecto extends Fragment {
             jsonObjCreateProject.put("ciudad", strCity);
             jsonObjCreateProject.put("direccion", strDirection);
             jsonObjCreateProject.put("fecha_creacion", format(today));
+            jsonObjCreateProject.put("ruta_archivo" , url);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -134,8 +136,6 @@ public class FragmentProyecto extends Fragment {
 
                 /*Aqui va la lectura del Json que retorne Lucho*/
 
-
-
             }}, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -144,8 +144,8 @@ public class FragmentProyecto extends Fragment {
         });
         queue.add(request);
     }
-    public  void readFilePreferences(){
 
+    public  void readFilePreferences(){
         SharedPreferences sharedPreferences= getActivity().getSharedPreferences("archivoPreferences", Context.MODE_PRIVATE);
         userName = sharedPreferences.getString("userName","no hay user");
         idUser   = sharedPreferences.getString("id","id");
@@ -171,13 +171,16 @@ public class FragmentProyecto extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         String rs=response.toString();
-                        if(response.toString().equals(""+"Success"+"")){
+                        String remplazo=rs.replace("\"","");
+                        String[] sucee=remplazo.split(";");
 
-                            Toast.makeText(getContext(), "Archivo Enviado", Toast.LENGTH_LONG).show();
-                            getValue();
-                        }else {
+                        if(sucee[0].equals("Sucess")){
+                            getValue(sucee[1]);
+                            Snackbar.make(getView(),"Archivo Enviado", Snackbar.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(getContext(), "No fue posible enviar su archivo", Toast.LENGTH_LONG).show();
+                        }
 
-                        };
                     }
                 }, new Response.ErrorListener() {
             @Override

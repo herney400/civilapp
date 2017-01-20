@@ -18,12 +18,13 @@ public class Periodo {
     Date fechaIngreso;
     Date fechaCreacion;
 
-    public Periodo( int idPerido,int idActividad, double dineroAsigado, double costoreal, double porcentajeAvance) {
+    public Periodo( int idPerido,int idActividad, double dineroAsigado, double costoreal, double porcentajeAvance, Date fechaInicial) {
         this.idPerido=idPerido;
         this.idActividad = idActividad;
         this.dineroAsigado = dineroAsigado;
         this.costoreal = costoreal;
         this.porcentajeAvance = porcentajeAvance;
+        this.fechaInicial=fechaInicial;
     }
 
 
