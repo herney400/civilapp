@@ -12,7 +12,7 @@ public class Project {
     String number_contract;
     String city;
     String direction;
-    //String fechaCreacion;
+    String fechaCreacion;
 
     public Project(int idProyecto, int idUsuatio, String name_project, String number_contract, String city, String direction) {
 
@@ -24,6 +24,7 @@ public class Project {
         this.direction = direction;
       ///  this.fechaCreacion = fechaCreacion;
     }
+    public Project(){}
 
     public int getIdProyecto() {
         return idProyecto;

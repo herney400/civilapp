@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navView;
 
     String id,email,userName;
+
+
 /*Un cambio*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 
-
+        obtenerDatosdeUsuario();
         /*
         //Eventos del Drawer Layout
         drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
@@ -71,11 +73,24 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.menu_seccion_1:
                                 fragment = new FragmentProyecto();
                                 fragmentTransaction = true;
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.content_frame, fragment)
+                                        .commit();
+                                menuItem.setChecked(true);
+                                getSupportActionBar().setTitle(menuItem.getTitle());
                                 break;
+
                             case R.id.menu_seccion_2:
-                                fragment = new FragmentProjects();
+                               // fragment = new FragmentProjects.newInstance(id,email);
+                                FragmentProjects f=FragmentProjects.newInstance(userName,id,email);
                                 fragmentTransaction = true;
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.content_frame, f)
+                                        .commit();
+                                menuItem.setChecked(true);
+                                getSupportActionBar().setTitle(menuItem.getTitle());
                                 break;
+
                             case R.id.menu_seccion_3:
                                 fragment = new FragmentProyecto();
                                 fragmentTransaction = true;
@@ -93,13 +108,13 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                         }
 
-                        if(fragmentTransaction) {
+                      /*  if(fragmentTransaction) {
                             getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.content_frame, fragment)
                                     .commit();
                             menuItem.setChecked(true);
                             getSupportActionBar().setTitle(menuItem.getTitle());
-                        }
+                        }*/
 
                         drawerLayout.closeDrawers();
                         return true;

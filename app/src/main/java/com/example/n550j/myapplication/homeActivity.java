@@ -29,6 +29,7 @@ import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.server.converter.StringToIntConverter;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -70,7 +71,7 @@ public class homeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 login();
-                startAcitivity("nada", "nada", "nada");
+                startAcitivityMain("usuario", 11, "usuario@gmail.com");
             }
         });
         textViewCreateCount.setOnClickListener(new View.OnClickListener() {
@@ -103,12 +104,13 @@ public class homeActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    if(response.getBoolean("type")){
-                       JSONObject jo= response.getJSONObject("data");
-                       String name= jo.getString("nombre");
-                       String idUser=  jo.getString("idusuario");
-                       String email= jo.getString("email");
-                       startAcitivity(name,idUser,email);
+
+                    if(response.getBoolean("estado")){
+                       JSONObject jo= response.getJSONObject("usuario");
+                       int idUser=  jo.getInt("IDUSUARIO");
+                       String name= jo.getString("NOMBRE");
+                       String email= jo.getString("EMAIL");
+                       startAcitivityMain(name,idUser,email);
                     }else{
                         dialogAlertaP("No existe", context ,"Oops");
                     }
@@ -131,17 +133,17 @@ public class homeActivity extends AppCompatActivity {
 
     }
 
-     public void startAcitivity(String userName, String idUser,String email){
+     public void startAcitivityMain(String userName, int idUser,String email){
          SharedPreferences sharedPreferences= getSharedPreferences("archivoPreferences",Context.MODE_PRIVATE);
          SharedPreferences.Editor editor=sharedPreferences.edit();
 
          editor.putString("userName",userName);
-         editor.putString("id",idUser);
+         editor.putInt("id",idUser);
          editor.putString("email", email);
          editor.commit();
 
          Intent intent = new Intent(this, MainActivity.class);
-         intent.putExtra("emailuser", userName);
+         intent.putExtra("userName", userName);
          intent.putExtra("id",idUser);
          intent.putExtra("email",email);
          startActivity(intent);

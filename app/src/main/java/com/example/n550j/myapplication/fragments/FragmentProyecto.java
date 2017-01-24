@@ -55,9 +55,12 @@ public class FragmentProyecto extends Fragment {
     Button buttonCargarArchvo;
     FloatingActionButton floatingActionButton;
     public static String BASE_URL = "http://74.208.113.25/api/upload";
+
+    //"http://74.208.113.25/api/projects"
     EditText editTextNameProject, editTextNumbreProject, editTextCity,editTextDirection;
     String strNmaeProject,strNumberProject, strCity, strDirection;
-    String  userName, idUser,  email;
+    String  userName,  email;
+    int idUser;
 
     static final int PICK_IMAGE_REQUEST = 1;
     private static final int FILE_SELECT_CODE = 0;
@@ -115,12 +118,19 @@ public class FragmentProyecto extends Fragment {
     public void createProject(String strNmaeProject,String strNumberProject, String strCity,String strDirection, String url){
 
         JSONObject jsonObjCreateProject = new JSONObject();
+        JSONObject jsonObjectID=new JSONObject();
         RequestQueue queue = Volley.newRequestQueue(getContext());
         Date today=new  Date();
         String URL = Constantes.URL_CREATE_PROJECT;
         try {
+            jsonObjectID.put("idusuario", idUser);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
             jsonObjCreateProject.put("nombre_proyecto",strNmaeProject);
-            jsonObjCreateProject.put("idusuario",idUser);
+            jsonObjCreateProject.put("idusuario",11);
             jsonObjCreateProject.put("numero_contrato", strNumberProject);
             jsonObjCreateProject.put("ciudad", strCity);
             jsonObjCreateProject.put("direccion", strDirection);
@@ -148,7 +158,7 @@ public class FragmentProyecto extends Fragment {
     public  void readFilePreferences(){
         SharedPreferences sharedPreferences= getActivity().getSharedPreferences("archivoPreferences", Context.MODE_PRIVATE);
         userName = sharedPreferences.getString("userName","no hay user");
-        idUser   = sharedPreferences.getString("id","id");
+        idUser   = sharedPreferences.getInt("id",1);
         email    = sharedPreferences.getString("email", "email");
     }
 
@@ -178,9 +188,8 @@ public class FragmentProyecto extends Fragment {
                             getValue(sucee[1]);
                             Snackbar.make(getView(),"Archivo Enviado", Snackbar.LENGTH_LONG).show();
                         }else{
-                            Toast.makeText(getContext(), "No fue posible enviar su archivo", Toast.LENGTH_LONG).show();
+                            Snackbar.make(getView(),"No fue posible enviar su archivo", Snackbar.LENGTH_LONG).show();
                         }
-
                     }
                 }, new Response.ErrorListener() {
             @Override

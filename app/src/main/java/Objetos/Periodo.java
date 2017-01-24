@@ -8,24 +8,34 @@ import java.util.Date;
 
 public class Periodo {
 
+
+
     int idPerido;
-    int idActividad;
+    String fechaInicial;
+    String fechaFinal;
+    String fechaCreacion;
+
     double dineroAsigado;
-    Date fechaInicial;
-    Date fechaFinal;
+    int idActividad;
     double costoreal;
     double porcentajeAvance;
     Date fechaIngreso;
-    Date fechaCreacion;
 
+    public Periodo(int idPerido, String fechaInicial, String fechaFinal, String fechaCreacion) {
+        this.idPerido = idPerido;
+        this.fechaInicial = fechaInicial;
+        this.fechaFinal = fechaFinal;
+        this.fechaCreacion = fechaCreacion;
+    }
     public Periodo( int idPerido,int idActividad, double dineroAsigado, double costoreal, double porcentajeAvance, Date fechaInicial) {
         this.idPerido=idPerido;
         this.idActividad = idActividad;
         this.dineroAsigado = dineroAsigado;
         this.costoreal = costoreal;
         this.porcentajeAvance = porcentajeAvance;
-        this.fechaInicial=fechaInicial;
     }
+
+    public Periodo(){}
 
 
     public int getIdPerido() {
@@ -52,19 +62,21 @@ public class Periodo {
         this.dineroAsigado = dineroAsigado;
     }
 
-    public Date getFechaInicial() {
+    public String getFechaInicial() {
         return fechaInicial;
+
+
     }
 
-    public void setFechaInicial(Date fechaInicial) {
+    public void setFechaInicial(String fechaInicial) {
         this.fechaInicial = fechaInicial;
     }
 
-    public Date getFechaFinal() {
+    public String getFechaFinal() {
         return fechaFinal;
     }
 
-    public void setFechaFinal(Date fechaFinal) {
+    public void setFechaFinal(String fechaFinal) {
         this.fechaFinal = fechaFinal;
     }
 
@@ -92,11 +104,11 @@ public class Periodo {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public Date getFechaCreacion() {
+    public String getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(Date fechaCreacion) {
+    public void setFechaCreacion(String fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
