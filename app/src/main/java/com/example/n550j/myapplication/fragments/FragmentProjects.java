@@ -1,5 +1,6 @@
 package com.example.n550j.myapplication.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -155,7 +156,9 @@ public class FragmentProjects extends Fragment {
 
         List<Project> projectListe=new ArrayList<>();
         queue.getCache().clear();
-
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("cargando");
+        progressDialog.show();
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -182,11 +185,13 @@ public class FragmentProjects extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                progressDialog.cancel();
 
             }}, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("ERROR",""+error);
+                progressDialog.cancel();
             }
         });
         queue.add(request);

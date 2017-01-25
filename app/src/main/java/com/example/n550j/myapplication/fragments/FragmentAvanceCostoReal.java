@@ -1,6 +1,7 @@
 package com.example.n550j.myapplication.fragments;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -140,6 +141,12 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
         String URL = Constantes.URL_TRAE_PERIODOS+idProyecto;
         queue.getCache().clear();
 
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("cargando");
+        progressDialog.show();
+
+
+
         final List<Periodo> periodoList=new ArrayList<>();
         JsonRequest request = new JsonObjectRequest(Request.Method.GET, URL,null, new Response.Listener<JSONObject>() {
             @Override
@@ -164,11 +171,12 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
                     }catch (JSONException e) {
                          e.printStackTrace();
                     }
-
+                progressDialog.cancel();
             }}, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("ERROR",""+error);
+                progressDialog.cancel();
             }
         });
         queue.add(request);
@@ -183,6 +191,10 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
 
         RequestQueue queue = Volley.newRequestQueue(c);
         String URL = Constantes.URL_TRAE_ACTIVIDADES+"idproject="+idProyecto+"&idperiod="+idPeriodo;
+        queue.getCache().clear();
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("cargando");
+        progressDialog.show();
         final List<Actividad> actividadList=new ArrayList<>();
         JsonRequest request = new JsonObjectRequest(Request.Method.GET, URL,null, new Response.Listener<JSONObject>() {
             @Override
@@ -216,11 +228,13 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                progressDialog.cancel();
 
             }}, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("ERROR",""+error);
+                progressDialog.cancel();
             }
         });
         queue.add(request);
@@ -232,10 +246,10 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-           String item=parent.getItemAtPosition(position).toString();
+            String item=parent.getItemAtPosition(position).toString();
             Periodo p= (Periodo) spinner_periodos.getSelectedItem();
             getActivida(p.getIdPerido(),idProyecto,getContext());
-           Log.e("obtencion del item", "idPeriodo"+p.getIdPerido()+"__id Proyecto"+idProyecto);
+
             Toast.makeText(getContext(),"El periodo seleccionado es"+p.getIdPerido()+"Id proy"+idProyecto,Toast.LENGTH_LONG).show();
     }
 
