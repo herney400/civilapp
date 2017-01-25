@@ -10,11 +10,70 @@ public class Actividad {
     int idPoyecto;
     String nombreActividad;
     int diasduracion;
-    double costoTotal;
-    double costoReal;
+    String iniciacion_primera;
+    String finalizacion_primera;
+    int costo_total;
     int holguralibre;
-    int finalizacionCompleta;
     double porcentaje;
+    int finalizacionCompleta;
+    double costoTotal;
+    String fecha_inicial;
+    String fecha_final;
+
+    public String getIniciacion_primera() {
+        return iniciacion_primera;
+    }
+
+    public void setIniciacion_primera(String iniciacion_primera) {
+        this.iniciacion_primera = iniciacion_primera;
+    }
+
+    public String getFinalizacion_primera() {
+        return finalizacion_primera;
+    }
+
+    public void setFinalizacion_primera(String finalizacion_primera) {
+        this.finalizacion_primera = finalizacion_primera;
+    }
+
+    public int getCosto_total() {
+        return costo_total;
+    }
+
+    public void setCosto_total(int costo_total) {
+        this.costo_total = costo_total;
+    }
+
+    public String getFecha_inicial() {
+        return fecha_inicial;
+    }
+
+    public void setFecha_inicial(String fecha_inicial) {
+        this.fecha_inicial = fecha_inicial;
+    }
+
+    public String getFecha_final() {
+        return fecha_final;
+    }
+
+    public void setFecha_final(String fecha_final) {
+        this.fecha_final = fecha_final;
+    }
+
+    public String getFecha_creacion() {
+        return fecha_creacion;
+    }
+
+    public void setFecha_creacion(String fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
+
+    String fecha_creacion;
+
+    double costoReal;
+
+
+
 
     public Actividad(int idActividad, int idPoyecto, String nombreActividad, int diasduracion, double costoTotal, double costoReal, int holguralibre, int finalizacionCompleta, double porcentaje) {
         this.idActividad = idActividad;
@@ -27,6 +86,7 @@ public class Actividad {
         this.finalizacionCompleta = finalizacionCompleta;
         this.porcentaje = porcentaje;
     }
+    public  Actividad(){}
 
     public double getPorcentaje() {
 

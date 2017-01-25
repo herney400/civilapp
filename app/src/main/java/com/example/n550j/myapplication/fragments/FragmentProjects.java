@@ -151,8 +151,6 @@ public class FragmentProjects extends Fragment {
         JSONObject jsonObjproyectos = new JSONObject();
         RequestQueue queue = Volley.newRequestQueue(c);
 
-
-
         String URL = Constantes.URL_TRAE_PROYECTOS+"?user="+idUserc;
 
         List<Project> projectListe=new ArrayList<>();

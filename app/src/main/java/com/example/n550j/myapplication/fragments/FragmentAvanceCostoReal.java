@@ -87,14 +87,14 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
 
         List<String> periodos = new ArrayList<String>();
         periodos.add("periodo 1"+idProyecto);
-        periodos.add("periodo 2"+idProyecto);
+      /*  periodos.add("periodo 2"+idProyecto);
         periodos.add("periodo 3"+idProyecto);
         periodos.add("periodo 4"+idProyecto);
         periodos.add("periodo 5"+idProyecto);
         periodos.add("periodo 6"+idProyecto);
         periodos.add("periodo 7"+idProyecto);
         periodos.add("periodo 8"+idProyecto);
-        periodos.add("periodo 9"+idProyecto);
+        periodos.add("periodo 9"+idProyecto);*/
         Log.e("ID en avance", "--<"+idProyecto);
 
         List actividades= new ArrayList();
@@ -104,18 +104,20 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
         actividades.add(new Actividad(1,2,"Crear mezclas",4,2000,1000,2,0,3.9));
 
 
-        getPeriodos(idProyecto, getContext());
-
-        spinner_periodos= (Spinner) view.findViewById(R.id.spinner_periodos);
-        spinner_periodos.setOnItemSelectedListener(this);
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, periodos);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_periodos.setAdapter(dataAdapter);
-
-      //
-        startRecyclerView(actividades);
+       periodoListPublico= getPeriodos(idProyecto, getContext(), view);
+      //  startRecyclerView(actividades);
         return view;
     }
+
+
+    public  void spinnerd( List<Periodo> periodos, View view){
+        spinner_periodos= (Spinner) view.findViewById(R.id.spinner_periodos);
+        spinner_periodos.setOnItemSelectedListener(this);
+        ArrayAdapter<Periodo> dataAdapter = new ArrayAdapter<Periodo>(getContext(), android.R.layout.simple_spinner_item, periodos);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_periodos.setAdapter(dataAdapter);
+    }
+
     public  void startRecyclerView(List<Actividad> actividads){
         recyclerViewActividades.setAdapter(new AdapterActividades(actividads,new AdapterActividades.OnItemClickListener(){
             @Override
@@ -125,8 +127,9 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
             }
         },getContext() ));
     }
-
-    public List<Periodo> getPeriodos(int idProyecto, Context c){
+/*Metodo utilizado apra obtener los peridos pertenecientes al proyecto seleccionado *
+ */
+    public List<Periodo> getPeriodos(int idProyecto, Context c, final View view){
         JSONObject jsonObjperiodo = new JSONObject();
         RequestQueue queue = Volley.newRequestQueue(c);
         try {
@@ -142,22 +145,73 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    if(response.getBoolean("Status")){
-                        JSONArray ja= response.getJSONArray("Periodos");
-                        for(int i=0;i<ja.length();i++){
-                            JSONObject jsonObjectPeriodos=ja.getJSONObject(i);
-                            Periodo periodo=new Periodo();
-                            periodo.setIdPerido(jsonObjectPeriodos.getInt("IDPERIODO"));
-                            periodo.setFechaInicial(jsonObjectPeriodos.getString("FECHA_INICIAL"));
-                            periodo.setFechaFinal(jsonObjectPeriodos.getString("FECHA_FINAL"));
-                            periodo.setFechaCreacion(jsonObjectPeriodos.getString("FECHA_CREACION"));
-                            periodoList.add(periodo);
+                        if(response.getBoolean("Status")){
+                            JSONArray ja= response.getJSONArray("Periodos");
+                            for(int i=0;i<ja.length();i++){
+                                JSONObject jsonObjectPeriodos=ja.getJSONObject(i);
+                                Periodo periodo=new Periodo();
+                                periodo.setIdPerido(jsonObjectPeriodos.getInt("IDPERIODO"));
+                                periodo.setFechaInicial(jsonObjectPeriodos.getString("FECHA_INICIAL"));
+                                periodo.setFechaFinal(jsonObjectPeriodos.getString("FECHA_FINAL"));
+                                periodo.setFechaCreacion(jsonObjectPeriodos.getString("FECHA_CREACION"));
+                                periodoList.add(periodo);
+                            }
+                                spinnerd(periodoList, view);
+                                retornArray(periodoList);
+                        }else{
+                            Snackbar.make(getView(),"No tienes periodos", Snackbar.LENGTH_LONG).show();
                         }
-                        retornArray(periodoList);
+                    }catch (JSONException e) {
+                         e.printStackTrace();
+                    }
 
+            }}, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("ERROR",""+error);
+            }
+        });
+        queue.add(request);
+        return   periodoList;
+    }
+/*Metodo utilizado para retornar las actividades pertenecientes al periodo seleccionado
+* @parametro 1: idProyecto
+* @parametro 2: idPeriodo
+* */
+
+    public List<Periodo> getActivida(int idPeriodo,int idProyecto, Context c){
+
+        RequestQueue queue = Volley.newRequestQueue(c);
+        String URL = Constantes.URL_TRAE_ACTIVIDADES+"idproject="+idProyecto+"&idperiod="+idPeriodo;
+        final List<Actividad> actividadList=new ArrayList<>();
+        JsonRequest request = new JsonObjectRequest(Request.Method.GET, URL,null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if(response.getBoolean("Status")){
+                        JSONArray ja= response.getJSONArray("Actividades");
+                        for(int i=0;i<ja.length();i++){
+                            JSONObject jsonObjectActividades=ja.getJSONObject(i);
+                            Actividad actividad=new Actividad();
+                            actividad.setIdActividad(jsonObjectActividades.getInt("IDACTIVIDAD"));
+                            actividad.setIdPoyecto(jsonObjectActividades.getInt("IDPROYECTO"));
+                            actividad.setNombreActividad(jsonObjectActividades.getString("NOMBRE_ACTIVIDAD"));
+                            actividad.setDiasduracion(jsonObjectActividades.getInt("DIAS_DURACION"));
+                            actividad.setIniciacion_primera(jsonObjectActividades.getString("INICIACION_PRIMERA"));
+                            actividad.setFinalizacion_primera(jsonObjectActividades.getString("FINALIZACION_PRIMERA"));
+                            actividad.setCosto_total(jsonObjectActividades.getInt("COSTO_TOTAL"));
+                            actividad.setHolguralibre(jsonObjectActividades.getInt("HOLGURA_LIBRE"));
+                            actividad.setPorcentaje(0.0);
+                            actividad.setFinalizacionCompleta(0);
+                            actividad.setCostoReal(0);
+                            actividad.setFecha_inicial("2017-01-22T17:46:45.77");
+                            actividad.setFecha_final("2017-01-22T17:46:45.77");
+                            actividad.setFecha_creacion(jsonObjectActividades.getString("FECHA_CREACION"));
+                            actividadList.add(actividad);
+                        }
+                        startRecyclerView(actividadList);
                     }else{
-                        Snackbar.make(getView(),"No tienes periodos", Snackbar.LENGTH_LONG).show();
-                        //  dialogAlertaP("No hay proyectos ", context ,"Oops");
+                        Snackbar.make(getView(),"No existen actividades para el periodo seleccionado", Snackbar.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -172,18 +226,17 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
         queue.add(request);
         return  periodoList;
     }
-
     public List<Periodo> retornArray(List<Periodo> periodoList){
         this.periodoListPublico=periodoList;
-
-
-        Log.e("Lengeth------>",""+periodoListPublico.size());
         return periodoListPublico;
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String item=parent.getItemAtPosition(position).toString();
-        Toast.makeText(getContext(),"Select"+item+"-id"+idProyecto,Toast.LENGTH_LONG).show();
+           String item=parent.getItemAtPosition(position).toString();
+            Periodo p= (Periodo) spinner_periodos.getSelectedItem();
+            getActivida(p.getIdPerido(),idProyecto,getContext());
+           Log.e("obtencion del item", "idPeriodo"+p.getIdPerido()+"__id Proyecto"+idProyecto);
+            Toast.makeText(getContext(),"El periodo seleccionado es"+p.getIdPerido()+"Id proy"+idProyecto,Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -195,12 +248,4 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
         /*Aquie hay que crear el codigo para traer los periodos*/
         return  a;
     }
-
-    public void getPeriods(){
-
-
-    }
-
-
-
 }

@@ -62,7 +62,7 @@ public class Periodo {
         this.dineroAsigado = dineroAsigado;
     }
 
-    public String getFechaInicial() {
+    public String toString() {
         return fechaInicial;
 
 
