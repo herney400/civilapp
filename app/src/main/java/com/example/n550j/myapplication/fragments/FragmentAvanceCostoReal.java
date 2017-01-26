@@ -3,9 +3,11 @@ package com.example.n550j.myapplication.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -99,11 +101,11 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
         Log.e("ID en avance", "--<"+idProyecto);
 
         List actividades= new ArrayList();
-        actividades.add(new Actividad(1,2,"Crear columna",4,2000,1000,2,0,3.9));
+    /*    actividades.add(new Actividad(1,2,"Crear columna",4,2000,1000,2,0,3.9));
         actividades.add(new Actividad(1,2,"Crear anden",4,2000,1000,2,0,3.9));
         actividades.add(new Actividad(1,2,"Crear palanca",4,2000,1000,2,0,3.9));
         actividades.add(new Actividad(1,2,"Crear mezclas",4,2000,1000,2,0,3.9));
-
+*/
 
        periodoListPublico= getPeriodos(idProyecto, getContext(), view);
       //  startRecyclerView(actividades);
@@ -213,9 +215,9 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
                             actividad.setFinalizacion_primera(jsonObjectActividades.getString("FINALIZACION_PRIMERA"));
                             actividad.setCosto_total(jsonObjectActividades.getInt("COSTO_TOTAL"));
                             actividad.setHolguralibre(jsonObjectActividades.getInt("HOLGURA_LIBRE"));
-                            actividad.setPorcentaje(0.0);
-                            actividad.setFinalizacionCompleta(0);
-                            actividad.setCostoReal(0);
+                            actividad.setPorcentaje(jsonObjectActividades.getDouble("PORCENTAJE_AVANCE"));
+                            actividad.setFinalizacionCompleta(jsonObjectActividades.getBoolean("FINALIZACION_COMPLETA"));
+                            actividad.setCostoReal(jsonObjectActividades.getDouble("COSTO_REAL"));
                             actividad.setFecha_inicial("2017-01-22T17:46:45.77");
                             actividad.setFecha_final("2017-01-22T17:46:45.77");
                             actividad.setFecha_creacion(jsonObjectActividades.getString("FECHA_CREACION"));
@@ -240,6 +242,48 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
         queue.add(request);
         return  periodoList;
     }
+
+    public boolean updateActivity(int idActividad , int finalizacionCompleta, double porcentaje_avance ,double costoReal, final Context c){
+
+        JSONObject jsonObjAcitivdad = new JSONObject();
+        RequestQueue queue = Volley.newRequestQueue(c);
+        queue.getCache().clear();
+
+        try {
+            jsonObjAcitivdad.put("idActividad", idActividad);
+            jsonObjAcitivdad.put("finalizacion_completa", finalizacionCompleta);
+            jsonObjAcitivdad.put("porcentaje_avance", porcentaje_avance);
+            jsonObjAcitivdad.put("costo_real",costoReal);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String URL = Constantes.URL_UPDATE_ACTIVIDADES;
+
+        JsonRequest request = new JsonObjectRequest(Request.Method.POST, URL, jsonObjAcitivdad, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if(response.getBoolean("Status")){
+                        //JSONObject jo= response.getJSONObject("data");
+                        createSimpleDialog("La actividad a sido actualizada",c).show();
+
+                    }else{
+                        createSimpleDialog("La actividad no pudo ser actualizada", c).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }}, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("ERROR",""+error);
+            }
+        });
+        queue.add(request);
+        return  true;
+    }
     public List<Periodo> retornArray(List<Periodo> periodoList){
         this.periodoListPublico=periodoList;
         return periodoListPublico;
@@ -261,5 +305,19 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
         ArrayList<Periodo > a = null;
         /*Aquie hay que crear el codigo para traer los periodos*/
         return  a;
+    }
+    public AlertDialog createSimpleDialog(String actividad, Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setTitle("Alerta")
+                .setMessage(actividad )
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // listener.onPossitiveButtonClick();
+                            }
+                        });
+        return builder.create();
     }
 }

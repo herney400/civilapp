@@ -15,7 +15,7 @@ public class Actividad {
     int costo_total;
     int holguralibre;
     double porcentaje;
-    int finalizacionCompleta;
+    boolean finalizacionCompleta;
     double costoTotal;
     String fecha_inicial;
     String fecha_final;
@@ -75,7 +75,7 @@ public class Actividad {
 
 
 
-    public Actividad(int idActividad, int idPoyecto, String nombreActividad, int diasduracion, double costoTotal, double costoReal, int holguralibre, int finalizacionCompleta, double porcentaje) {
+    public Actividad(int idActividad, int idPoyecto, String nombreActividad, int diasduracion, double costoTotal, double costoReal, int holguralibre, boolean finalizacionCompleta, double porcentaje) {
         this.idActividad = idActividad;
         this.idPoyecto = idPoyecto;
         this.nombreActividad = nombreActividad;
@@ -154,11 +154,11 @@ public class Actividad {
         this.holguralibre = holguralibre;
     }
 
-    public int getFinalizacionCompleta() {
+    public boolean getFinalizacionCompleta() {
         return finalizacionCompleta;
     }
 
-    public void setFinalizacionCompleta(int finalizacionCompleta) {
+    public void setFinalizacionCompleta(boolean finalizacionCompleta) {
         this.finalizacionCompleta = finalizacionCompleta;
     }
 
