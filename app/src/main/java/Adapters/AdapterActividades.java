@@ -2,6 +2,7 @@ package Adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.annotation.DrawableRes;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -57,15 +58,13 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
                 FragmentAvanceCostoReal fragmentAvanceCostoReal=new FragmentAvanceCostoReal();
                 fragmentAvanceCostoReal.updateActivity(actividads.get(position).getIdActividad(),0,porcentaje,costoReal,context);
 
-             //   actividadesViewHolder.createSimpleDialog(actividads.get(position).getNombreActividad()).show();
-
             }
         });
         actividadesViewHolder.btn_finalizar.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View v) {
                 Toast.makeText(context,"Finalizada :"+actividads.get(position).getNombreActividad()+"",Toast.LENGTH_LONG).show();
+                actividadesViewHolder.createSimpleDialog( ).show();
             }
         });
     }
@@ -126,7 +125,63 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
                 }
             });*/
         }
+        public AlertDialog createSimpleDialog() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
+            builder.setTitle("Alerta")
+                    .setMessage("Termino la actividad en el tiempo planeado ?")
+                    .setPositiveButton("SI",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                 //   createSimple().show();
+                                }
+                            }).setNegativeButton("NO",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            createSingleListDialog().show();
+                        }
+                    });
+
+
+            return builder.create();
+        }
+
+        public AlertDialog createSingleListDialog() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+            final CharSequence[] items = new CharSequence[14];
+
+            items[0] = "Mala programaciòn";
+            items[1] = "Falta de cancha (Prerrequisitos)";
+            items[2] = "Planos defectuosos";
+            items[3] = "Falta de M.O";
+            items[4] = "Problema con contratistas";
+            items[5] = "Problema con proveedores";
+            items[6] = "Falta o falla de equipos";
+            items[7] = "Bajo rendimiento M.O";
+            items[8] = "Falta de materiales";
+            items[9] = "Mala ejecucion del trabajo";
+            items[10] = "Indefinicion o cambio del proyecto";
+            items[11] = "Cambio en prioridades";
+            items[12] = "Motivos climaticos";
+            items[13] = "Falta de permisos";
+
+
+            builder.setTitle("Elija una causal")
+                    .setIcon(R.drawable.common_google_signin_btn_icon_dark)
+                    .setItems(items, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(
+                                   context,"Seleccionaste:"+edtcostoReal.getText() + items[which],  Toast.LENGTH_SHORT) .show();
+
+                        }
+                    });
+
+            return builder.create();
+        }
     }
 
 

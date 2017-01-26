@@ -194,9 +194,11 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
         RequestQueue queue = Volley.newRequestQueue(c);
         String URL = Constantes.URL_TRAE_ACTIVIDADES+"idproject="+idProyecto+"&idperiod="+idPeriodo;
         queue.getCache().clear();
+
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("cargando");
         progressDialog.show();
+
         final List<Actividad> actividadList=new ArrayList<>();
         JsonRequest request = new JsonObjectRequest(Request.Method.GET, URL,null, new Response.Listener<JSONObject>() {
             @Override
@@ -260,6 +262,8 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
         }
         String URL = Constantes.URL_UPDATE_ACTIVIDADES;
 
+
+
         JsonRequest request = new JsonObjectRequest(Request.Method.POST, URL, jsonObjAcitivdad, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -274,6 +278,7 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
 
             }}, new Response.ErrorListener() {
             @Override
