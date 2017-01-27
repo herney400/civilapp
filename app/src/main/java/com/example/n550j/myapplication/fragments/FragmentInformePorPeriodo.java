@@ -12,10 +12,10 @@ import com.example.n550j.myapplication.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OneFragment extends Fragment {
+public class FragmentInformePorPeriodo extends Fragment {
 
 
-    public OneFragment() {
+    public FragmentInformePorPeriodo() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class OneFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_one, container, false);
+        return inflater.inflate(R.layout.fragment_informe_por_periodo, container, false);
     }
 
 }

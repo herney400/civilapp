@@ -50,6 +50,7 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
     int     idProyecto ;
     private static final String ARG_IDPROYECTO = "ID_PROYECTO";
     Spinner spinner_periodos;
+
     protected ArrayAdapter<Periodo> adapter;
     SpinnerAdapter spinnerAdapter;
     List<Periodo> periodoListPublico=new ArrayList<Periodo>();
@@ -90,22 +91,10 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
 
         List<String> periodos = new ArrayList<String>();
         periodos.add("periodo 1"+idProyecto);
-      /*  periodos.add("periodo 2"+idProyecto);
-        periodos.add("periodo 3"+idProyecto);
-        periodos.add("periodo 4"+idProyecto);
-        periodos.add("periodo 5"+idProyecto);
-        periodos.add("periodo 6"+idProyecto);
-        periodos.add("periodo 7"+idProyecto);
-        periodos.add("periodo 8"+idProyecto);
-        periodos.add("periodo 9"+idProyecto);*/
+
         Log.e("ID en avance", "--<"+idProyecto);
 
         List actividades= new ArrayList();
-    /*    actividades.add(new Actividad(1,2,"Crear columna",4,2000,1000,2,0,3.9));
-        actividades.add(new Actividad(1,2,"Crear anden",4,2000,1000,2,0,3.9));
-        actividades.add(new Actividad(1,2,"Crear palanca",4,2000,1000,2,0,3.9));
-        actividades.add(new Actividad(1,2,"Crear mezclas",4,2000,1000,2,0,3.9));
-*/
 
        periodoListPublico= getPeriodos(idProyecto, getContext(), view);
       //  startRecyclerView(actividades);
@@ -250,20 +239,15 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
         JSONObject jsonObjAcitivdad = new JSONObject();
         RequestQueue queue = Volley.newRequestQueue(c);
         queue.getCache().clear();
-
         try {
             jsonObjAcitivdad.put("idActividad", idActividad);
             jsonObjAcitivdad.put("finalizacion_completa", finalizacionCompleta);
             jsonObjAcitivdad.put("porcentaje_avance", porcentaje_avance);
             jsonObjAcitivdad.put("costo_real",costoReal);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
         String URL = Constantes.URL_UPDATE_ACTIVIDADES;
-
-
-
         JsonRequest request = new JsonObjectRequest(Request.Method.POST, URL, jsonObjAcitivdad, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -271,15 +255,51 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
                     if(response.getBoolean("Status")){
                         //JSONObject jo= response.getJSONObject("data");
                         createSimpleDialog("La actividad a sido actualizada",c).show();
-
                     }else{
                         createSimpleDialog("La actividad no pudo ser actualizada", c).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }}, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("ERROR",""+error);
+            }
+        });
+        queue.add(request);
+        return  true;
+    }//Fin updateActividad()
+    public boolean finalizarActivity(int idActividad , int finalizacionCompleta, double porcentaje_avance ,double costoReal, int idCausal, final Context c){
 
+        JSONObject jsonObjAcitivdad = new JSONObject();
+        RequestQueue queue = Volley.newRequestQueue(c);
+        queue.getCache().clear();
+        try {
 
+            jsonObjAcitivdad.put("idActividad", idActividad);
+            jsonObjAcitivdad.put("finalizacion_completa", finalizacionCompleta);
+            jsonObjAcitivdad.put("porcentaje_avance", porcentaje_avance);
+            jsonObjAcitivdad.put("costo_real",costoReal);
+            jsonObjAcitivdad.put("idCausal",idCausal);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String URL = Constantes.URL_UPDATE_ACTIVIDADES;
+        JsonRequest request = new JsonObjectRequest(Request.Method.POST, URL, jsonObjAcitivdad, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if(response.getBoolean("Status")){
+                        //JSONObject jo= response.getJSONObject("data");
+                        createSimpleDialog("La actividad a sido actualizada",c).show();
+                    }else{
+                        createSimpleDialog("La actividad no pudo ser actualizada", c).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }}, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -289,6 +309,8 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
         queue.add(request);
         return  true;
     }
+
+
     public List<Periodo> retornArray(List<Periodo> periodoList){
         this.periodoListPublico=periodoList;
         return periodoListPublico;

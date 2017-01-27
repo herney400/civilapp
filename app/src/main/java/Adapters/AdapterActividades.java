@@ -64,7 +64,7 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
             @Override
             public void onClick(View v) {
                 Toast.makeText(context,"Finalizada :"+actividads.get(position).getNombreActividad()+"",Toast.LENGTH_LONG).show();
-                actividadesViewHolder.createSimpleDialog( ).show();
+                actividadesViewHolder.createSimpleDialog(actividads.get(position).getIdActividad() ).show();
             }
         });
     }
@@ -125,11 +125,11 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
                 }
             });*/
         }
-        public AlertDialog createSimpleDialog() {
+        public AlertDialog createSimpleDialog(final int idActividad) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
             builder.setTitle("Alerta")
-                    .setMessage("Termino la actividad en el tiempo planeado ?")
+                    .setMessage("Tèrmino la actividad en el tiempo planeado ?")
                     .setPositiveButton("SI",
                             new DialogInterface.OnClickListener() {
                                 @Override
@@ -140,15 +140,13 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            createSingleListDialog().show();
+                            createSingleListDialog(idActividad).show();
                         }
                     });
-
-
             return builder.create();
         }
 
-        public AlertDialog createSingleListDialog() {
+        public AlertDialog createSingleListDialog(final int idActividad) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
             final CharSequence[] items = new CharSequence[14];
@@ -168,14 +166,12 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
             items[12] = "Motivos climaticos";
             items[13] = "Falta de permisos";
 
-
             builder.setTitle("Elija una causal")
                     .setIcon(R.drawable.common_google_signin_btn_icon_dark)
                     .setItems(items, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(
-                                   context,"Seleccionaste:"+edtcostoReal.getText() + items[which],  Toast.LENGTH_SHORT) .show();
+                            Toast.makeText( context,"Seleccionaste:"+edtcostoReal.getText()+"__Actividad:"+idActividad + items[which],  Toast.LENGTH_SHORT) .show();
 
                         }
                     });

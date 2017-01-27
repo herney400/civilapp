@@ -95,8 +95,8 @@ public class FragmentMisProyectos extends Fragment {
        // getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
      /*
         adapter.addFragment(fragmentAvanceCostoReal, "AVANCE COSTO REAL");
-        adapter.addFragment(new FragmentCurvaSdeCostos(), "INFORME POR PERIODO");
-        adapter.addFragment(new FragmentCurvaSdeCostos(), "INDICE DE DESEMPEÑO");
+        adapter.addFragment(new FragmentCurvadeCostos(), "INFORME POR PERIODO");
+        adapter.addFragment(new FragmentCurvadeCostos(), "INDICE DE DESEMPEÑO");
        */
         viewPager.setAdapter(new CustomFragmentPageAdapter(getChildFragmentManager(),idProyecto));
 

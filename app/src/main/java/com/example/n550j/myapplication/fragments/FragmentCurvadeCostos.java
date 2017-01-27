@@ -26,14 +26,14 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentCurvaSdeCostos extends Fragment {
+public class FragmentCurvadeCostos extends Fragment {
 
 
     ArrayList<BarEntry> BARENTRY ;
     ArrayList<String> BarEntryLabels ;
     BarDataSet Bardataset ;
     BarData BARDATA ;
-    public FragmentCurvaSdeCostos() {
+    public FragmentCurvadeCostos() {
         // Required empty public constructor
     }
 

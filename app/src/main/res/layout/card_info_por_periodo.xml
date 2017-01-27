@@ -1,0 +1,188 @@
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="fill_parent"
+    android:layout_height="400dp"
+    android:layout_margin="5dp"
+    card_view:cardCornerRadius="2dp"
+    card_view:contentPadding="10dp"
+    card_view:cardElevation="10dp">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="380dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:text="Porcentaje Avance"
+            android:layout_below="@+id/edtporcentajeAvance"
+            android:layout_alignStart="@+id/edtporcentajeAvance"
+            android:layout_alignBottom="@+id/textView8" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:text="Varianza de costo CV"
+            android:layout_below="@+id/edtporcentajeAvance"
+            android:layout_alignStart="@+id/textView3"
+            android:layout_toStartOf="@+id/porcentaje" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:text="Porcentaje de terminación"
+            android:layout_below="@+id/costoReal"
+            android:layout_alignStart="@+id/txvcostoReal"
+            android:layout_toStartOf="@+id/porcentaje" />
+
+        <TextView
+            android:id="@+id/txtcosto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:text="Costo Real de trabajo AC"
+            android:layout_below="@+id/txvduracion"
+            android:layout_alignStart="@+id/txduracion"
+            android:layout_toStartOf="@+id/porcentaje" />
+
+        <TextView
+            android:id="@+id/txvcostoReal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:text="Costo linea base  PV"
+            android:layout_below="@+id/txtcosto"
+            android:layout_alignStart="@+id/txtcosto"
+            android:layout_toStartOf="@+id/porcentaje" />
+
+        <TextView
+            android:text="%"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:layout_alignBaseline="@+id/edtporcentajeAvance"
+            android:layout_alignBottom="@+id/edtporcentajeAvance"
+            android:layout_alignEnd="@+id/btn_actualizar" />
+
+        <TextView
+            android:id="@+id/nombreActividad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:text="nombreActividad"
+
+            android:layout_toEndOf="@+id/txduracion" />
+
+        <TextView
+            android:id="@+id/txvduracion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:text=" Duracion"
+            android:layout_below="@+id/nombreActividad"
+            android:layout_toEndOf="@+id/txtcosto" />
+
+        <TextView
+            android:id="@+id/costoProgramado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:text="Costo"
+            android:layout_below="@+id/txvduracion"
+            android:layout_alignStart="@+id/txvduracion"
+            android:layout_alignParentEnd="true" />
+
+        <EditText
+            android:id="@+id/costoReal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:text="Costo"
+            android:layout_alignBaseline="@+id/txvcostoReal"
+            android:layout_alignBottom="@+id/txvcostoReal"
+            android:layout_alignStart="@+id/costoProgramado"
+            android:layout_alignParentEnd="true" />
+
+        <EditText
+            android:id="@+id/edtporcentajeAvance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:text="%"
+            android:layout_below="@+id/txvcostoReal"
+            android:layout_alignStart="@+id/costoReal" />
+
+        <TextView
+            android:id="@+id/porcentaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:text="Porcentaje Avance"
+            android:layout_below="@+id/textView9"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:text="Varianza de programa SV"
+            android:layout_below="@+id/textView8"
+            android:layout_alignStart="@+id/textView8"
+            android:layout_toStartOf="@+id/textView9" />
+
+        <TextView
+            android:id="@+id/txtActividad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:text="Nombre Actividad"
+            />
+
+        <TextView
+            android:id="@+id/txduracion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:text="EV"
+            android:layout_below="@+id/txtActividad"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/porcentaje" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Actualizar"
+            android:id="@+id/btn_actualizar"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_below="@+id/porcentaje"
+            android:layout_alignEnd="@+id/nombreActividad"
+            android:layout_marginTop="69dp" />
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

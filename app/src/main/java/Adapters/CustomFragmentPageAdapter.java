@@ -5,7 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.n550j.myapplication.fragments.FragmentAvanceCostoReal;
-import com.example.n550j.myapplication.fragments.FragmentCurvaSdeCostos;
+import com.example.n550j.myapplication.fragments.FragmentCurvadeCostos;
+import com.example.n550j.myapplication.fragments.FragmentInformePorPeriodo;
 
 /**
  * Created by N550J on 23/01/2017.
@@ -13,7 +14,7 @@ import com.example.n550j.myapplication.fragments.FragmentCurvaSdeCostos;
 
 public class CustomFragmentPageAdapter extends FragmentPagerAdapter {
     private static final String TAG = CustomFragmentPageAdapter.class.getSimpleName();
-    private static final int FRAGMENT_COUNT = 2;
+    private static final int FRAGMENT_COUNT = 3;
     int idProyecto;
     public CustomFragmentPageAdapter(FragmentManager fm, int idProeyecto) {
         super(fm);
@@ -26,7 +27,9 @@ public class CustomFragmentPageAdapter extends FragmentPagerAdapter {
                 FragmentAvanceCostoReal fragmentAvanceCostoReal=FragmentAvanceCostoReal.newInstance(idProyecto);
                 return fragmentAvanceCostoReal;
             case 1:
-                return new FragmentCurvaSdeCostos();
+                return new FragmentInformePorPeriodo();
+            case 2:
+                return  new FragmentCurvadeCostos();///
         }
         return null;
     }
@@ -42,7 +45,7 @@ public class CustomFragmentPageAdapter extends FragmentPagerAdapter {
             case 1:
                 return "INFORME POR PERIODO";
             case 2:
-                return "INDICE DE DESEMPEÑO";
+                return "CURVA S DE COSTOS";
             case 3:
                 return "INDICE DE DESEMPEÑO";
         }
