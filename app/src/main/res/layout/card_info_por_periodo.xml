@@ -31,10 +31,10 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:textStyle="bold"
-            android:text="Varianza de costo CV"
+            android:text="Varianza CV"
             android:layout_below="@+id/edtporcentajeAvance"
             android:layout_alignStart="@+id/textView3"
-            android:layout_toStartOf="@+id/txtvarianzaSV" />
+            android:layout_toStartOf="@+id/textVarianzaCV" />
 
         <TextView
             android:id="@+id/textView3"
@@ -42,10 +42,10 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:textStyle="bold"
-            android:text="Porcentaje de terminación"
+            android:text="% de terminación"
             android:layout_below="@+id/costoRealPV"
             android:layout_alignStart="@+id/txvcostoReal"
-            android:layout_toStartOf="@+id/txtvarianzaSV" />
+            android:layout_toStartOf="@+id/costoRealPV" />
 
         <TextView
             android:id="@+id/txtcosto"
@@ -53,10 +53,11 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:textStyle="bold"
-            android:text="Costo Real de trabajo AC"
+            android:text="Costo AC"
             android:layout_below="@+id/txv_EV"
             android:layout_alignStart="@+id/txduracion"
-            android:layout_toStartOf="@+id/txtvarianzaSV" />
+            android:layout_toStartOf="@+id/txtvarianzaSV"
+            android:layout_alignEnd="@+id/txduracion" />
 
         <TextView
             android:id="@+id/txvcostoReal"
@@ -64,10 +65,10 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:textStyle="bold"
-            android:text="Costo linea base  PV"
+            android:text="Costo  PV"
             android:layout_below="@+id/txtcosto"
             android:layout_alignStart="@+id/txtcosto"
-            android:layout_toStartOf="@+id/txtvarianzaSV" />
+            android:layout_toStartOf="@+id/costoRealAC" />
 
         <TextView
             android:text="%"
@@ -139,7 +140,8 @@
             android:textStyle="bold"
             android:text="Porcentaje Avance"
             android:layout_below="@+id/textVarianzaCV"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/txtActividad" />
 
         <TextView
             android:id="@+id/textView6"
@@ -147,7 +149,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:textStyle="bold"
-            android:text="Varianza de programa SV"
+            android:text="Varianza SV"
             android:layout_below="@+id/textView8"
             android:layout_alignStart="@+id/textView8"
             android:layout_toStartOf="@+id/textVarianzaCV" />
@@ -170,7 +172,8 @@
             android:text="EV"
             android:layout_below="@+id/txtActividad"
             android:layout_alignParentStart="true"
-            android:layout_toStartOf="@+id/txtvarianzaSV" />
+            android:layout_toStartOf="@+id/txtvarianzaSV"
+            android:layout_alignEnd="@+id/txtActividad" />
 
         <Button
             android:layout_width="wrap_content"

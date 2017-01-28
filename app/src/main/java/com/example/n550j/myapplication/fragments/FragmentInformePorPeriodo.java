@@ -89,8 +89,9 @@ public class FragmentInformePorPeriodo extends Fragment implements AdapterView.O
         JSONObject jsonObjproyectos = new JSONObject();
         RequestQueue queue = Volley.newRequestQueue(c);
 
-        String URL = Constantes.URL_INFORME_PERIODO+"?idPeriodo="+idPeriodo+"?idProyecto="+idProyecto;
+        String URL = Constantes.URL_INFORME_PERIODO+"idproject="+idProyecto+"&idperiod="+idPeriodo;
 
+                 //   http://74.208.113.25/api/reportsperiods?idproject=51&idperiod=1196
         List<Project> projectListe=new ArrayList<>();
         queue.getCache().clear();
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
@@ -103,7 +104,7 @@ public class FragmentInformePorPeriodo extends Fragment implements AdapterView.O
                 List<Vista_Infore_Periodo> vista_infore_periodos=new ArrayList<>();
                 try {
                     if(response.getBoolean("Status")){
-                        JSONArray ja= response.getJSONArray("Informe");
+                        JSONArray ja= response.getJSONArray("Reports_Periods");
                         for(int i=0;i<ja.length();i++){
                             JSONObject jsonObjectInforPeriodos=ja.getJSONObject(i);
 

@@ -14,7 +14,7 @@ public class Constantes {
     public static final String  URL_CREATE_PROJECT="http://74.208.113.25/api/projects";
     public static final String  URL_TRAE_ACTIVIDADES="http://74.208.113.25/api/activities?";
     public static final String  URL_UPDATE_ACTIVIDADES ="http://74.208.113.25/api/activities";
-    public static final String  URL_INFORME_PERIODO ="http://74.208.113.25/api/";
+    public static final String  URL_INFORME_PERIODO =" http://74.208.113.25/api/reportsperiods?";
 
 
 

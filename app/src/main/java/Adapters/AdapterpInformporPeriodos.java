@@ -82,10 +82,10 @@ public class AdapterpInformporPeriodos  extends RecyclerView.Adapter<AdapterpInf
             nombreActividad.setText(vista_infore_periodo.getNombreActividad());
             txv_EV.setText(vista_infore_periodo.getEV()+"");
             costoRealAC.setText(vista_infore_periodo.getAC()+"");
-            costoRealPV.setText(vista_infore_periodo.getPV());
+            costoRealPV.setText(vista_infore_periodo.getPV()+"");
             edtporcentajeAvance.setText(vista_infore_periodo.getPorcentajeAvance()+"");
-            textVarianzaCV.setText(vista_infore_periodo.getCV());
-            txtvarianzaSV.setText(vista_infore_periodo.getSV());
+            textVarianzaCV.setText(vista_infore_periodo.getCV()+"");
+            txtvarianzaSV.setText(vista_infore_periodo.getSV()+"");
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
