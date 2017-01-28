@@ -2,11 +2,8 @@ package Adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.annotation.DrawableRes;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +18,6 @@ import com.example.n550j.myapplication.fragments.FragmentAvanceCostoReal;
 import java.util.List;
 
 import Objetos.Actividad;
-import Objetos.Project;
-
-import static com.example.n550j.myapplication.R.string.number_contract;
 
 /**
  * Created by N550J on 18/01/2017.
@@ -92,9 +86,9 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
         public ActividadesViewHolder(View itemview){
             super(itemview);
              txtmombreActivida= (TextView) itemview.findViewById(R.id.nombreActividad);
-             txtduracionActivida= (TextView) itemview.findViewById(R.id.txvduracion);
-             txtcostoProgramado= (TextView) itemview.findViewById(R.id.costoProgramado);
-             edtcostoReal= (EditText) itemview.findViewById(R.id.costoReal);
+             txtduracionActivida= (TextView) itemview.findViewById(R.id.txv_EV);
+             txtcostoProgramado= (TextView) itemview.findViewById(R.id.costoRealAC);
+             edtcostoReal= (EditText) itemview.findViewById(R.id.costoRealPV);
              edtporcentaje= (EditText) itemview.findViewById(R.id.edtporcentajeAvance);
              btn_actualizar= (Button) itemview.findViewById(R.id.btn_actualizar);
              btn_finalizar= (Button) itemview.findViewById(R.id.btn_finalizar);

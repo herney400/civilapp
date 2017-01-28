@@ -173,6 +173,8 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
         queue.add(request);
         return   periodoList;
     }
+
+
 /*Metodo utilizado para retornar las actividades pertenecientes al periodo seleccionado
 * @parametro 1: idProyecto
 * @parametro 2: idPeriodo

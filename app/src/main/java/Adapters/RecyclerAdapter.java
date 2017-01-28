@@ -110,6 +110,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Projec
          });
      }
   }
+
+
+
     public int obtenerElID(int posito){
         Log.e("Este es el ID ",""+projects.get(posito).getCity());
 
@@ -119,7 +122,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Projec
 
 
     List<Project> projects;
-    public  RecyclerAdapter(List<Project> projects,OnItemClickListener listener,Context context){
+    public  RecyclerAdapter(List<Project> projects, OnItemClickListener listener, Context context){
         this.projects=projects;
         this.escucha=listener;
         this.context=context;
