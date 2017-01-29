@@ -15,6 +15,10 @@ public class Constantes {
     public static final String  URL_TRAE_ACTIVIDADES="http://74.208.113.25/api/activities?";
     public static final String  URL_UPDATE_ACTIVIDADES ="http://74.208.113.25/api/activities";
     public static final String  URL_INFORME_PERIODO =" http://74.208.113.25/api/reportsperiods?";
+    public static final String  URL_CAUSALES ="http://74.208.113.25/api/causals";
+    public static final String  URL_FINALIZAR ="http://74.208.113.25/api/CausalsActivities";
+
+
 
 
 

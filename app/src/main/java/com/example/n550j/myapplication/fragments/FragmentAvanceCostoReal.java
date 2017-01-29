@@ -1,7 +1,9 @@
 package com.example.n550j.myapplication.fragments;
 
 
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.app.VoiceInteractor;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -24,10 +26,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.error.VolleyError;
+import com.android.volley.request.JsonArrayRequest;
 import com.android.volley.request.JsonObjectRequest;
 import com.android.volley.request.JsonRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.n550j.myapplication.R;
+import com.google.android.gms.appdatasearch.GetRecentContextCall;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +43,7 @@ import java.util.List;
 import Adapters.AdapterActividades;
 import Adapters.RecyclerAdapter;
 import Objetos.Actividad;
+import Objetos.Causal;
 import Objetos.Periodo;
 import Objetos.Project;
 import costantes.Constantes;
@@ -50,7 +55,7 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
     int     idProyecto ;
     private static final String ARG_IDPROYECTO = "ID_PROYECTO";
     Spinner spinner_periodos;
-
+    Context context=getContext();
     protected ArrayAdapter<Periodo> adapter;
     SpinnerAdapter spinnerAdapter;
     List<Periodo> periodoListPublico=new ArrayList<Periodo>();
@@ -58,6 +63,10 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     List<Periodo> periodoList=new ArrayList<Periodo>();
+
+    List<String> CausalList;
+    CharSequence [] causa;
+
 
     public FragmentAvanceCostoReal() {
         // Required empty public constructor
@@ -111,7 +120,9 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
     }
 
     public  void startRecyclerView(List<Actividad> actividads){
-        recyclerViewActividades.setAdapter(new AdapterActividades(actividads,new AdapterActividades.OnItemClickListener(){
+        List<String> copia=new ArrayList<>();
+        copia=CausalList;
+        recyclerViewActividades.setAdapter(new AdapterActividades(actividads,causa,new AdapterActividades.OnItemClickListener(){
             @Override
             public void onItemClick(Actividad item) {
                 FragmentMisProyectos fragment=new FragmentMisProyectos();
@@ -119,9 +130,12 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
             }
         },getContext() ));
     }
+
+
+
 /*Metodo utilizado apra obtener los peridos pertenecientes al proyecto seleccionado *
  */
-    public List<Periodo> getPeriodos(int idProyecto, Context c, final View view){
+    public List<Periodo> getPeriodos(int idProyecto, final Context c, final View view){
         JSONObject jsonObjperiodo = new JSONObject();
         RequestQueue queue = Volley.newRequestQueue(c);
         try {
@@ -131,13 +145,9 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
         }
         String URL = Constantes.URL_TRAE_PERIODOS+idProyecto;
         queue.getCache().clear();
-
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("cargando");
         progressDialog.show();
-
-
-
         final List<Periodo> periodoList=new ArrayList<>();
         JsonRequest request = new JsonObjectRequest(Request.Method.GET, URL,null, new Response.Listener<JSONObject>() {
             @Override
@@ -156,6 +166,7 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
                             }
                                 spinnerd(periodoList, view);
                                 retornArray(periodoList);
+                                   getCausales(c);
                         }else{
                             Snackbar.make(getView(),"No tienes periodos", Snackbar.LENGTH_LONG).show();
                         }
@@ -172,15 +183,75 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
         });
         queue.add(request);
         return   periodoList;
-    }
+    }//fin getPeriodo
 
+
+    public List<Causal> getCausales( Context c){
+        JSONObject jsonObjperiodo = new JSONObject();
+        RequestQueue queue = Volley.newRequestQueue(c);
+        try {
+            jsonObjperiodo.put("IDPROYECTO", idProyecto);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String URL = Constantes.URL_CAUSALES;
+        queue.getCache().clear();
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("cargando");
+        progressDialog.show();
+
+        final List<Causal> causals=new ArrayList<>();
+
+        JsonRequest request = new JsonObjectRequest(Request.Method.GET, URL,null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if(response.getBoolean("Status")){
+                        JSONArray ja= response.getJSONArray("Causals");
+                     //   final CharSequence[] items = new CharSequence[ja.length()];
+
+                        causa = parseJSON(ja);
+                       // AdapterActividades adapterActividades=new AdapterActividades(items);
+                        Log.e("dd","dd");
+
+                    }else{
+                        Snackbar.make(getView(),"No tienes periodos", Snackbar.LENGTH_LONG).show();
+                    }
+                }catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                progressDialog.cancel();
+            }}, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("ERROR",""+error);
+                progressDialog.cancel();
+            }
+        });
+        queue.add(request);
+        return   causals;
+    }
+public CharSequence[] parseJSON(JSONArray jsonArray) throws JSONException {
+     List<String> causale=new ArrayList<>();
+    CharSequence[]  causals = new CharSequence[jsonArray.length()];
+
+    for(int i=0;i<jsonArray.length();i++){
+        JSONObject jsonObjectCausals = jsonArray.getJSONObject(i);
+        // Causal causal=new Causal();
+        //  causal.setIDCAUSAL(jsonObjectCausals.getInt("IDCAUSAL"));
+        causals[i]=jsonObjectCausals.getString("NOMBRE");
+       // causale.add(  jsonObjectCausals.getString("NOMBRE"));
+    }
+    return causals;
+
+}
 
 /*Metodo utilizado para retornar las actividades pertenecientes al periodo seleccionado
 * @parametro 1: idProyecto
 * @parametro 2: idPeriodo
 * */
 
-    public List<Periodo> getActivida(int idPeriodo,int idProyecto, Context c){
+    public List<Periodo> getActivida(int idPeriodo, int idProyecto, final Context c){
 
         RequestQueue queue = Volley.newRequestQueue(c);
         String URL = Constantes.URL_TRAE_ACTIVIDADES+"idproject="+idProyecto+"&idperiod="+idPeriodo;
@@ -217,6 +288,7 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
                             actividadList.add(actividad);
                         }
                         startRecyclerView(actividadList);
+
                     }else{
                         Snackbar.make(getView(),"No existen actividades para el periodo seleccionado", Snackbar.LENGTH_LONG).show();
                     }
@@ -272,6 +344,53 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
         queue.add(request);
         return  true;
     }//Fin updateActividad()
+
+    public void finalizaActivida(int idActividad, ArrayList causalList, Context contextt ) throws JSONException {
+
+        JSONArray jsonArray=new JSONArray();
+
+        for (int i=0;i<causalList.size();i++){
+
+            try {
+                jsonArray.put(i,causalList.get(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("Idcausals",jsonArray);
+        jsonObject.put("Idactivity",idActividad);
+        RequestQueue queue=Volley.newRequestQueue(contextt);
+
+        String URL=Constantes.URL_FINALIZAR ;
+        queue.getCache().clear();
+        JsonRequest request = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if(response.getBoolean("Status")){
+                        String resp=response.getString("Message");
+
+                    }else{
+                        String resp=response.getString("Message");
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }}, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("ERROR",""+error);
+            }
+        });
+        queue.add(request);
+
+    }
+
     public boolean finalizarActivity(int idActividad , int finalizacionCompleta, double porcentaje_avance ,double costoReal, int idCausal, final Context c){
 
         JSONObject jsonObjAcitivdad = new JSONObject();
