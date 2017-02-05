@@ -99,7 +99,7 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
         View view= inflater.inflate(R.layout.fragment_fragment_curva_sde_costos, container, false);
 
 
-        final GraphView graph = (GraphView)view.findViewById(R.id.chart1);
+//        final GraphView graph = (GraphView)view.findViewById(R.id.chart1);
 
 
         botonBuscar= (Button) view.findViewById(R.id.buttonBuscar);
@@ -119,7 +119,7 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
                 new DataPoint(2, 300),
                 new DataPoint(3, 200),
                 new DataPoint(4, 600)
-        });*/
+        });
 
 
 
@@ -150,14 +150,14 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
         graph.getLegendRenderer().setMargin(1);
 
 
-        graph.addSeries(series);
+        graph.addSeries(series); */
         getPeriodos(idProyecto, getContext(), view);
-        graph.setTitle("dddd");
+      //  graph.setTitle("dddd");
 
 
 
 
-  /*      barChart= (LineChart) view.findViewById(R.id.chart1);
+        barChart= (LineChart) view.findViewById(R.id.chart1);
 
         BARENTRY = new ArrayList<>();
 
@@ -215,7 +215,7 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
                 labels.add("Periodo 6");
         lineDataSets.add(dataset);
         lineDataSets.add(dataset2);
-       /* LineData data=new LineData(labels,dataset);
+        LineData data=new LineData(labels,dataset);
         LineData data2=new LineData(labels,dataset2);
 
 
@@ -235,7 +235,7 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
                 Toast.makeText(getContext(),lineChart.getX()+"__"+lineChart.getX(),Toast.LENGTH_LONG).show();
             }
         });
-*/
+
         // Inflate the layout for this fragment
         return view;
 
@@ -268,7 +268,6 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
 
 
     public void AddValuesToBARENTRY(){
-
         BARENTRY.add(new BarEntry(2f, 0));
         BARENTRY.add(new BarEntry(4f, 1));
         BARENTRY.add(new BarEntry(6f, 2));
@@ -292,8 +291,56 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
     public  void graphView(){
 
 
-    }
-
+    }/*Metodo utilizado para obtener CV PV EV*/
+    public List<Periodo> getCVPVEV(int idProyecto, int idPeriodo,final Context c, final View view){
+        JSONObject jsonObjperiodo = new JSONObject();
+        RequestQueue queue = Volley.newRequestQueue(c);
+        try {
+            jsonObjperiodo.put("IDPROYECTO", idProyecto);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String URL = Constantes.URL_TRAE_PERIODOS+idProyecto;
+        queue.getCache().clear();
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("cargando");
+        progressDialog.show();
+        final List<Periodo> periodoList=new ArrayList<>();
+        JsonRequest request = new JsonObjectRequest(Request.Method.GET, URL,null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if(response.getBoolean("Status")){
+                        JSONArray ja= response.getJSONArray("Periodos");
+                        for(int i=0;i<ja.length();i++){
+                            JSONObject jsonObjectPeriodos=ja.getJSONObject(i);
+                            Periodo periodo=new Periodo();
+                            periodo.setIdPerido(jsonObjectPeriodos.getInt("IDPERIODO"));
+                            periodo.setFechaInicial(jsonObjectPeriodos.getString("FECHA_INICIAL"));
+                            periodo.setFechaFinal(jsonObjectPeriodos.getString("FECHA_FINAL"));
+                            periodo.setFechaCreacion(jsonObjectPeriodos.getString("FECHA_CREACION"));
+                            periodoList.add(periodo);
+                        }
+                        spinnerd(periodoList, view);
+                        //  retornArray(periodoList);
+                        //  getCausales(c);
+                    }else{
+                        Snackbar.make(getView(),"No tienes periodos", Snackbar.LENGTH_LONG).show();
+                    }
+                }catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                progressDialog.cancel();
+            }}, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("ERROR",""+error);
+                progressDialog.cancel();
+            }
+        });
+        queue.add(request);
+        return   periodoList;
+    }//fin getCVPVEV
 
     /*Metodo utilizado apra obtener los peridos pertenecientes al proyecto seleccionado *
      */
