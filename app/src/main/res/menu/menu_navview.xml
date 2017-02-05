@@ -9,7 +9,7 @@
             android:id="@+id/menu_seccion_2"
             android:icon="@mipmap/ic_assignment_late_black_24dp"
             android:title="@string/seccion_2"/>
-        <item
+   <!--     <item
             android:id="@+id/menu_seccion_3"
             android:icon="@mipmap/ic_assignment_late_black_24dp"
             android:title="@string/seccion_3"/>
@@ -37,7 +37,7 @@
             android:id="@+id/menu_seccion_9"
             android:icon="@mipmap/ic_assignment_late_black_24dp"
             android:title="@string/seccion_9"/>
-
+-->
 
     </group>
 

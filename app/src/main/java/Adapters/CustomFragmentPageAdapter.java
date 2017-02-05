@@ -30,7 +30,9 @@ public class CustomFragmentPageAdapter extends FragmentPagerAdapter {
                 FragmentInformePorPeriodo fragmentInformePorPeriodo=FragmentInformePorPeriodo.newInstance(idProyecto);
                 return  fragmentInformePorPeriodo;
             case 2:
-                return  new FragmentCurvadeCostos();///
+                FragmentCurvadeCostos fragmentCurvadeCostos=FragmentCurvadeCostos.newInstance(idProyecto);
+
+                return  fragmentCurvadeCostos;///
         }
         return null;
     }

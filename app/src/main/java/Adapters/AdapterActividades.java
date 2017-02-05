@@ -55,9 +55,16 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
             public void onClick(View v) {
 
                 double porcentaje = Double.parseDouble(actividadesViewHolder.edtporcentaje.getText().toString());
-                double costoReal= Double.parseDouble  (actividadesViewHolder.edtcostoReal.getText().toString());
+                double costoReal  = Double.parseDouble(actividadesViewHolder.edtcostoReal.getText().toString());
+
                 FragmentAvanceCostoReal fragmentAvanceCostoReal=new FragmentAvanceCostoReal();
-                fragmentAvanceCostoReal.updateActivity(actividads.get(position).getIdActividad(),0,porcentaje,costoReal,context);
+
+                if(porcentaje==100.0){
+                    fragmentAvanceCostoReal.updateActivity(actividads.get(position).getIdActividad(),1,porcentaje,costoReal,context);
+                }else {
+                    fragmentAvanceCostoReal.updateActivity(actividads.get(position).getIdActividad(),0,porcentaje,costoReal,context);
+                }
+
 
             }
         });

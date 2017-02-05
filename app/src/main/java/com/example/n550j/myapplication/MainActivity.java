@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                                 menuItem.setChecked(true);
                                 getSupportActionBar().setTitle(menuItem.getTitle());
                                 break;
-
+/*
                             case R.id.menu_seccion_3:
                                 fragment = new FragmentProyecto();
                                 fragmentTransaction = true;
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                                 fragment = new FragmentCurvadeCostos();
                                 fragmentTransaction = true;
                                 break;
-
+*/
                             case R.id.menu_opcion_1:
                                 Log.i("NavigationView", "Pulsada opción 1");
                                 break;
@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                         }*/
 
                         drawerLayout.closeDrawers();
+
                         return true;
                     }
                 });

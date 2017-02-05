@@ -3,16 +3,16 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="fill_parent"
-    android:layout_height="400dp"
     android:layout_margin="5dp"
     card_view:cardCornerRadius="2dp"
     card_view:contentPadding="10dp"
-    card_view:cardElevation="10dp">
+    card_view:cardElevation="10dp"
+    android:layout_height="300dp">
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="380dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_height="299dp">
 
         <TextView
             android:id="@+id/textVarianzaCV"
@@ -175,16 +175,7 @@
             android:layout_toStartOf="@+id/txtvarianzaSV"
             android:layout_alignEnd="@+id/txtActividad" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Actualizar"
-            android:id="@+id/btn_actualizar"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_marginTop="17dp"
-            android:layout_below="@+id/txtvarianzaSV"
-            android:layout_toEndOf="@+id/txv_EV"
-            android:layout_marginStart="15dp" />
+
 
 
     </RelativeLayout>

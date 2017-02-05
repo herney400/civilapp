@@ -38,4 +38,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.0.+'
     compile 'de.codecrafters.tableview:tableview:2.4.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.jjoe64:graphview:4.2.1'
 }

@@ -14,7 +14,9 @@ public class Actividad {
     String finalizacion_primera;
     int costo_total;
     int holguralibre;
+
     double porcentaje;
+
     boolean finalizacionCompleta;
     double costoTotal;
     String fecha_inicial;

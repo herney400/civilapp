@@ -441,7 +441,6 @@ public CharSequence[] parseJSON(JSONArray jsonArray) throws JSONException {
             String item=parent.getItemAtPosition(position).toString();
             Periodo p= (Periodo) spinner_periodos.getSelectedItem();
             getActivida(p.getIdPerido(),idProyecto,getContext());
-
             Toast.makeText(getContext(),"El periodo seleccionado es"+p.getIdPerido()+"Id proy"+idProyecto,Toast.LENGTH_LONG).show();
     }
 
