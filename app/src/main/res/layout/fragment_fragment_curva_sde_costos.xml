@@ -23,24 +23,24 @@
                 android:orientation="vertical"
                 android:weightSum="1">
 
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/chart1"
-                    android:layout_marginTop="50dp"
-                    android:layout_width="386dp"
-                    android:layout_height="300dp"
-                    android:paddingRight="10dp"
-                    android:layout_marginLeft="10dp"
-                     />
-                <!--
-                                <com.jjoe64.graphview.GraphView
-                                    android:id="@+id/chart1"
-                                    android:layout_width="386dp"
-                                    android:layout_height="300dp"
-                                    android:paddingRight="10dp"
+                     <com.github.mikephil.charting.charts.LineChart
+                          android:id="@+id/chart1"
+                          android:layout_marginTop="50dp"
+                          android:layout_width="386dp"
+                          android:layout_height="300dp"
+                          android:paddingRight="10dp"
+                          android:layout_marginLeft="10dp"
+                       />
 
-                                    android:layout_marginTop="70dp"
+                          <!--             <com.jjoe64.graphview.GraphView
+                                          android:id="@+id/chart1"
+                                          android:layout_width="386dp"
+                                          android:layout_height="300dp"
+                                          android:paddingRight="10dp"
 
-                                    />-->
+                                          android:layout_marginTop="70dp"
+
+                                          />-->
 
 
                             </LinearLayout>

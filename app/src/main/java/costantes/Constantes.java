@@ -17,6 +17,9 @@ public class Constantes {
     public static final String  URL_INFORME_PERIODO =" http://74.208.113.25/api/reportsperiods?";
     public static final String  URL_CAUSALES ="http://74.208.113.25/api/causals";
     public static final String  URL_FINALIZAR ="http://74.208.113.25/api/CausalsActivities";
+    public static final String  URL_CV_PV ="http://74.208.113.25/api/scurve?idproject=";
+
+
 
 
 

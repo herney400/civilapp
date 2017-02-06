@@ -27,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.n550j.myapplication.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -58,6 +59,7 @@ import java.util.List;
 import java.util.Locale;
 
 import Objetos.Periodo;
+import Objetos.Vista_Infore_Periodo;
 import costantes.Constantes;
 
 /**
@@ -69,6 +71,10 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
     String fechaPeriodo;
     Spinner spinner_periodos;
     Button botonBuscar;
+    ArrayList entriesAC = new ArrayList<String>();
+    ArrayList entriesPV = new ArrayList<String>();
+    ArrayList entriesEV = new ArrayList<String>();
+    ArrayList entriesRange = new ArrayList<String>();
 
     ArrayList<BarEntry> BARENTRY ;
     ArrayList<String> BarEntryLabels ;
@@ -95,8 +101,8 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
-        LineChart barChart;
-        View view= inflater.inflate(R.layout.fragment_fragment_curva_sde_costos, container, false);
+
+        final View view= inflater.inflate(R.layout.fragment_fragment_curva_sde_costos, container, false);
 
 
 //        final GraphView graph = (GraphView)view.findViewById(R.id.chart1);
@@ -107,6 +113,7 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
 
+               graficar(view);
 
 
 
@@ -120,8 +127,6 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
                 new DataPoint(3, 200),
                 new DataPoint(4, 600)
         });
-
-
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
                 new DataPoint(0, 1),
@@ -157,89 +162,111 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
 
 
 
-        barChart= (LineChart) view.findViewById(R.id.chart1);
-
-        BARENTRY = new ArrayList<>();
-
-        BarEntryLabels = new ArrayList<String>();
-
-        AddValuesToBARENTRY();
-
-        AddValuesToBarEntryLabels();
-
-        Bardataset = new BarDataSet(BARENTRY, "Projects");
-
-        BARDATA = new BarData(BarEntryLabels, Bardataset);
-
-        Bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
-
-        //barChart.setData(BARDATA);
-
-        barChart.animateY(3000);
-        final LineChart lineChart = (LineChart) view.findViewById(R.id.chart1);
-                // creating list of entry<br />
-                ArrayList entries = new ArrayList<String>();
-                entries.add(new Entry(0, 0));
-                entries.add(new Entry(16f, 1));
-                entries.add(new Entry(6f, 2));
-                entries.add(new Entry(2f, 3));
-                entries.add(new Entry(18f, 4));
-                entries.add(new Entry(9f, 5));
-                entries.add(new Entry(10f, 6));
-
-        ArrayList entries2 = new ArrayList<String>();
-        entries2.add(new Entry(0, 0));
-        entries2.add(new Entry(10f, 1));
-        entries2.add(new Entry(8f, 2));
-        entries2.add(new Entry(6f, 3));
-        entries2.add(new Entry(8f, 4));
-        entries2.add(new Entry(7f, 5));
-        entries2.add(new Entry(10f, 6));
-
-        LineDataSet dataset=new LineDataSet(entries,"dd");
-        dataset.setColor(Color.BLUE);
-        LineDataSet dataset2=new LineDataSet(entries2,"jj");
-
-
-        dataset.setDrawCubic(true);
-        dataset2.setDrawCubic(true);
-        ArrayList <ILineDataSet> lineDataSets=new ArrayList<>();
-        ArrayList labels = new ArrayList<String>();
-
-                labels.add("Periodo 0");
-                labels.add("Periodo 1");
-                labels.add("Periodo 2");
-                labels.add("Periodo 3");
-                labels.add("Periodo 4");
-                labels.add("Periodo 5");
-                labels.add("Periodo 6");
-        lineDataSets.add(dataset);
-        lineDataSets.add(dataset2);
-        LineData data=new LineData(labels,dataset);
-        LineData data2=new LineData(labels,dataset2);
-
-
-        lineChart.setDoubleTapToZoomEnabled(true);
-        lineChart.setDrawBorders(true);
-        
-
-        lineChart.setData(new LineData(labels,lineDataSets));
-      //  lineChart.setData(data2);
-
-        lineChart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-
-                Toast.makeText(getContext(),lineChart.getX()+"__"+lineChart.getX(),Toast.LENGTH_LONG).show();
-            }
-        });
 
         // Inflate the layout for this fragment
         return view;
 
     }
+public  void graficar(View view){
+
+    LineChart barChart;
+    barChart= (LineChart) view.findViewById(R.id.chart1);
+    barChart.clear();
+    BARENTRY = new ArrayList<>();
+
+    BarEntryLabels = new ArrayList<String>();
+
+    AddValuesToBARENTRY();
+
+    AddValuesToBarEntryLabels();
+
+    Bardataset = new BarDataSet(BARENTRY, "Projects");
+
+    BARDATA = new BarData(BarEntryLabels, Bardataset);
+
+    Bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
+
+    //barChart.setData(BARDATA);
+
+    barChart.animateY(3000);
+    final LineChart lineChart = (LineChart) view.findViewById(R.id.chart1);
+    // creating list of entry<br />
+    ArrayList entries = new ArrayList<String>();
+    entries.add(new Entry(0, 0));
+    entries.add(new Entry(16f, 1));
+    entries.add(new Entry(6f, 2));
+    entries.add(new Entry(2f, 3));
+    entries.add(new Entry(2f, 4));
+    entries.add(new Entry(9f, 5));
+    entries.add(new Entry(10f, 6));
+
+    ArrayList entries2 = new ArrayList<String>();
+
+    int i=1; int j=2;
+    entries2.add(new Entry(i, j));
+    entries2.add(new Entry(10, 1));
+    entries2.add(new Entry(8, 2));
+    entries2.add(new Entry(8, 3));
+    entries2.add(new Entry(8, 4));
+    entries2.add(new Entry(7, 5));
+    entries2.add(new Entry(10, 6));
+
+    //   ArrayList<int> entrada=new ArrayList<>();
+
+    LineDataSet dataset=new LineDataSet(entriesAC,"AC");
+    dataset.setColor(Color.BLUE);
+    LineDataSet dataset2=new LineDataSet(entriesEV,"EV");
+    dataset2.setColor(Color.RED);
+    LineDataSet dataSet3=new LineDataSet(entriesPV,"PV");
+    dataSet3.setColor(Color.GRAY);
+
+
+    dataset.setDrawCubic(true);
+    dataset2.setDrawCubic(true);
+    dataSet3.setDrawCubic(true);
+
+    ArrayList <ILineDataSet> lineDataSets=new ArrayList<>();
+    ArrayList labels = new ArrayList<String>();
+
+    labels.add("Periodo 0");
+    labels.add("Periodo 1");
+    labels.add("Periodo 2");
+    labels.add("Periodo 3");
+    labels.add("Periodo 4");
+    labels.add("Periodo 5");
+    labels.add("Periodo 6");
+    lineDataSets.add(dataset);
+    lineDataSets.add(dataset2);
+    lineDataSets.add(dataSet3);
+    LineData data=new LineData(entriesRange,dataset);
+    LineData data2=new LineData(entriesRange,dataset2);
+    LineData data3=new LineData(entriesRange, dataSet3);
+
+    lineChart.setDoubleTapToZoomEnabled(true);
+    lineChart.setDrawBorders(true);
+
+
+    lineChart.setData(new LineData(entriesRange,lineDataSets));
+    //  lineChart.setData(data2);
+
+    lineChart.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+
+
+            Toast.makeText(getContext(),lineChart.getX()+"__"+lineChart.getX(),Toast.LENGTH_LONG).show();
+        }
+    });
+
+
+
+}
+
+
+
+
+
     private static String convierteFecha(String stringFechaEntrada, String formatoEntrada, String formatoSalida){
         Log.i("TAG", "stringFechaEntrada :" +  stringFechaEntrada);
         //Definimos formato del string que ingresamos.
@@ -288,44 +315,41 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
 
     }
 
-    public  void graphView(){
 
-
-    }/*Metodo utilizado para obtener CV PV EV*/
-    public List<Periodo> getCVPVEV(int idProyecto, int idPeriodo,final Context c, final View view){
-        JSONObject jsonObjperiodo = new JSONObject();
+    /*Metodo utilizado para obtener CV PV EV*/
+    public List<Periodo> getCVPVEV(int idProyecto, int idPeriodo,final Context c){
+        JSONObject jsonObjCurvaScostos = new JSONObject();
         RequestQueue queue = Volley.newRequestQueue(c);
         try {
-            jsonObjperiodo.put("IDPROYECTO", idProyecto);
+            jsonObjCurvaScostos.put("IDPROYECTO", idProyecto);
+            jsonObjCurvaScostos.put("IDPERIODO", idPeriodo);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        String URL = Constantes.URL_TRAE_PERIODOS+idProyecto;
+        String URL = Constantes.URL_CV_PV+idProyecto+"&idperiod="+idPeriodo;
         queue.getCache().clear();
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("cargando");
         progressDialog.show();
         final List<Periodo> periodoList=new ArrayList<>();
-        JsonRequest request = new JsonObjectRequest(Request.Method.GET, URL,null, new Response.Listener<JSONObject>() {
+        JsonRequest request = new JsonObjectRequest(Request.Method.POST, URL,jsonObjCurvaScostos, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     if(response.getBoolean("Status")){
-                        JSONArray ja= response.getJSONArray("Periodos");
-                        for(int i=0;i<ja.length();i++){
-                            JSONObject jsonObjectPeriodos=ja.getJSONObject(i);
-                            Periodo periodo=new Periodo();
-                            periodo.setIdPerido(jsonObjectPeriodos.getInt("IDPERIODO"));
-                            periodo.setFechaInicial(jsonObjectPeriodos.getString("FECHA_INICIAL"));
-                            periodo.setFechaFinal(jsonObjectPeriodos.getString("FECHA_FINAL"));
-                            periodo.setFechaCreacion(jsonObjectPeriodos.getString("FECHA_CREACION"));
-                            periodoList.add(periodo);
-                        }
-                        spinnerd(periodoList, view);
-                        //  retornArray(periodoList);
-                        //  getCausales(c);
+                        JSONArray jarrayRange= response.getJSONArray("Range");
+                        JSONArray jarrayAC=response.getJSONArray("AC");
+                        JSONArray jarrayPV=response.getJSONArray("PV");
+                        JSONArray jarrayEV=response.getJSONArray("EV");
+
+                        parseJsonAC(jarrayAC);
+                        parseJsonPV(jarrayPV);
+                        parseJsonEV(jarrayEV);
+                        parseJsonRange(jarrayRange);
+
                     }else{
-                        Snackbar.make(getView(),"No tienes periodos", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(getView(),"No tienes datos", Snackbar.LENGTH_LONG).show();
                     }
                 }catch (JSONException e) {
                     e.printStackTrace();
@@ -341,6 +365,52 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
         queue.add(request);
         return   periodoList;
     }//fin getCVPVEV
+
+    public ArrayList<String> parseJsonAC(JSONArray jsonArrayCV){
+        for (int i=0;i<jsonArrayCV.length();i++){
+            try {
+                entriesAC.add(new Entry(i,jsonArrayCV.getInt(i)));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return entriesAC;
+     }
+
+    public ArrayList<String> parseJsonPV(JSONArray jsonArrayPV){
+        for (int i=0;i<jsonArrayPV.length();i++){
+            try {
+                entriesPV.add(new Entry(i,jsonArrayPV.getInt(i)));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return entriesPV;
+    }
+
+    public ArrayList<String> parseJsonEV(JSONArray jsonArrayEV){
+        for (int i=0;i<jsonArrayEV.length();i++){
+            try {
+                entriesEV.add(new Entry(i,jsonArrayEV.getInt(i)));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return entriesEV;
+    }
+
+    public ArrayList<String> parseJsonRange(JSONArray jsonArrayrange){
+        for (int i=0;i<jsonArrayrange.length();i++){
+            try {
+                entriesRange.add(jsonArrayrange.getString(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return entriesRange;
+    }
+
+
 
     /*Metodo utilizado apra obtener los peridos pertenecientes al proyecto seleccionado *
      */
@@ -402,7 +472,8 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
        // getActivida(p.getIdPerido(),idProyecto,getContext());
         idPeriodo=p.getIdPerido();
         fechaPeriodo=p.getFechaFinal();
-       // Toast.makeText(getContext(),"El periodo seleccionado es"+p.getIdPerido()+"Id proy"+idProyecto,Toast.LENGTH_LONG).show();
+        getCVPVEV(idProyecto,idPeriodo,getContext());
+        Toast.makeText(getContext(),"El periodo seleccionado es"+p.getIdPerido()+"Id proy"+idProyecto,Toast.LENGTH_LONG).show();
     }
 
     @Override
