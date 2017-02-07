@@ -72,6 +72,8 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
     Spinner spinner_periodos;
     Button botonBuscar;
     ArrayList entriesAC = new ArrayList<String>();
+
+
     ArrayList entriesPV = new ArrayList<String>();
     ArrayList entriesEV = new ArrayList<String>();
     ArrayList entriesRange = new ArrayList<String>();
@@ -172,24 +174,25 @@ public  void graficar(View view){
     LineChart barChart;
     barChart= (LineChart) view.findViewById(R.id.chart1);
     barChart.clear();
-    BARENTRY = new ArrayList<>();
+   // BARENTRY = new ArrayList<>();
 
-    BarEntryLabels = new ArrayList<String>();
+  //  BarEntryLabels = new ArrayList<String>();
 
-    AddValuesToBARENTRY();
+  //  AddValuesToBARENTRY();
 
-    AddValuesToBarEntryLabels();
+   // AddValuesToBarEntryLabels();
 
-    Bardataset = new BarDataSet(BARENTRY, "Projects");
+   // Bardataset = new BarDataSet(BARENTRY, "Projects");
 
-    BARDATA = new BarData(BarEntryLabels, Bardataset);
+   // BARDATA = new BarData(BarEntryLabels, Bardataset);
 
-    Bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
+  //  Bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
 
     //barChart.setData(BARDATA);
 
     barChart.animateY(3000);
-    final LineChart lineChart = (LineChart) view.findViewById(R.id.chart1);
+    LineChart lineChart = (LineChart) view.findViewById(R.id.chart1);
+    lineChart.clear();
     // creating list of entry<br />
     ArrayList entries = new ArrayList<String>();
     entries.add(new Entry(0, 0));
@@ -216,9 +219,9 @@ public  void graficar(View view){
     LineDataSet dataset=new LineDataSet(entriesAC,"AC");
     dataset.setColor(Color.BLUE);
     LineDataSet dataset2=new LineDataSet(entriesEV,"EV");
-    dataset2.setColor(Color.RED);
+    dataset2.setColor(Color.GREEN);
     LineDataSet dataSet3=new LineDataSet(entriesPV,"PV");
-    dataSet3.setColor(Color.GRAY);
+    dataSet3.setColor(Color.RED);
 
 
     dataset.setDrawCubic(true);
@@ -238,6 +241,7 @@ public  void graficar(View view){
     lineDataSets.add(dataset);
     lineDataSets.add(dataset2);
     lineDataSets.add(dataSet3);
+
     LineData data=new LineData(entriesRange,dataset);
     LineData data2=new LineData(entriesRange,dataset2);
     LineData data3=new LineData(entriesRange, dataSet3);
@@ -247,15 +251,15 @@ public  void graficar(View view){
 
 
     lineChart.setData(new LineData(entriesRange,lineDataSets));
-    //  lineChart.setData(data2);
+    //lineChart.setData(data2);
+
+
 
     lineChart.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
-
-
-            Toast.makeText(getContext(),lineChart.getX()+"__"+lineChart.getX(),Toast.LENGTH_LONG).show();
+          //  Toast.makeText(getContext(),lineChart.getX()+"__"+lineChart.getX(),Toast.LENGTH_LONG).show();
         }
     });
 
@@ -294,7 +298,7 @@ public  void graficar(View view){
     }
 
 
-    public void AddValuesToBARENTRY(){
+  /*  public void AddValuesToBARENTRY(){
         BARENTRY.add(new BarEntry(2f, 0));
         BARENTRY.add(new BarEntry(4f, 1));
         BARENTRY.add(new BarEntry(6f, 2));
@@ -302,9 +306,9 @@ public  void graficar(View view){
         BARENTRY.add(new BarEntry(7f, 4));
         BARENTRY.add(new BarEntry(3f, 5));
 
-    }
+    }*/
 
-    public void AddValuesToBarEntryLabels(){
+  /*  public void AddValuesToBarEntryLabels(){
 
         BarEntryLabels.add("January");
         BarEntryLabels.add("February");
@@ -313,7 +317,7 @@ public  void graficar(View view){
         BarEntryLabels.add("May");
         BarEntryLabels.add("June");
 
-    }
+    }*/
 
 
     /*Metodo utilizado para obtener CV PV EV*/
@@ -367,9 +371,10 @@ public  void graficar(View view){
     }//fin getCVPVEV
 
     public ArrayList<String> parseJsonAC(JSONArray jsonArrayCV){
+        entriesAC.clear();
         for (int i=0;i<jsonArrayCV.length();i++){
             try {
-                entriesAC.add(new Entry(i,jsonArrayCV.getInt(i)));
+                entriesAC.add(new Entry(jsonArrayCV.getInt(i),i));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -378,9 +383,10 @@ public  void graficar(View view){
      }
 
     public ArrayList<String> parseJsonPV(JSONArray jsonArrayPV){
+       entriesPV.clear();
         for (int i=0;i<jsonArrayPV.length();i++){
             try {
-                entriesPV.add(new Entry(i,jsonArrayPV.getInt(i)));
+                entriesPV.add(new Entry(jsonArrayPV.getInt(i),i));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -389,9 +395,10 @@ public  void graficar(View view){
     }
 
     public ArrayList<String> parseJsonEV(JSONArray jsonArrayEV){
+       entriesEV.clear();
         for (int i=0;i<jsonArrayEV.length();i++){
             try {
-                entriesEV.add(new Entry(i,jsonArrayEV.getInt(i)));
+                entriesEV.add(new Entry(jsonArrayEV.getInt(i),i));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
