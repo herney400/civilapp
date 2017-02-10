@@ -105,114 +105,30 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
     public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
 
         final View view= inflater.inflate(R.layout.fragment_fragment_curva_sde_costos, container, false);
-
-
-//        final GraphView graph = (GraphView)view.findViewById(R.id.chart1);
-
-
         botonBuscar= (Button) view.findViewById(R.id.buttonBuscar);
         botonBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                graficar(view);
-
-
-
             }
         });
 
-      /*  LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(0, 100),
-                new DataPoint(1, 500),
-                new DataPoint(2, 300),
-                new DataPoint(3, 200),
-                new DataPoint(4, 600)
-        });
-
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6)
-        });
-
-        series.setAnimated(true);
-        series.setTitle("CV CA");
-
-        series.setOnDataPointTapListener(new OnDataPointTapListener() {
-            @Override
-            public void onTap(Series series, DataPointInterface dataPoint) {
-                Toast.makeText(getActivity(), "Series1: punto click: "+dataPoint, Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        series.setTitle("CV");
-
-        graph.setClickable(true);
-        graph.getLegendRenderer().setVisible(true);
-        graph.getLegendRenderer().setAlign(com.jjoe64.graphview.LegendRenderer.LegendAlign.BOTTOM);
-        graph.getLegendRenderer().setMargin(1);
-
-
-        graph.addSeries(series); */
         getPeriodos(idProyecto, getContext(), view);
-      //  graph.setTitle("dddd");
-
-
-
-
 
         // Inflate the layout for this fragment
         return view;
 
     }
-public  void graficar(View view){
+  public  void graficar(View view){
 
     LineChart barChart;
     barChart= (LineChart) view.findViewById(R.id.chart1);
     barChart.clear();
-   // BARENTRY = new ArrayList<>();
-
-  //  BarEntryLabels = new ArrayList<String>();
-
-  //  AddValuesToBARENTRY();
-
-   // AddValuesToBarEntryLabels();
-
-   // Bardataset = new BarDataSet(BARENTRY, "Projects");
-
-   // BARDATA = new BarData(BarEntryLabels, Bardataset);
-
-  //  Bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
-
-    //barChart.setData(BARDATA);
 
     barChart.animateY(3000);
     LineChart lineChart = (LineChart) view.findViewById(R.id.chart1);
     lineChart.clear();
-    // creating list of entry<br />
-    ArrayList entries = new ArrayList<String>();
-    entries.add(new Entry(0, 0));
-    entries.add(new Entry(16f, 1));
-    entries.add(new Entry(6f, 2));
-    entries.add(new Entry(2f, 3));
-    entries.add(new Entry(2f, 4));
-    entries.add(new Entry(9f, 5));
-    entries.add(new Entry(10f, 6));
 
-    ArrayList entries2 = new ArrayList<String>();
-
-    int i=1; int j=2;
-    entries2.add(new Entry(i, j));
-    entries2.add(new Entry(10, 1));
-    entries2.add(new Entry(8, 2));
-    entries2.add(new Entry(8, 3));
-    entries2.add(new Entry(8, 4));
-    entries2.add(new Entry(7, 5));
-    entries2.add(new Entry(10, 6));
 
     //   ArrayList<int> entrada=new ArrayList<>();
 
@@ -223,21 +139,12 @@ public  void graficar(View view){
     LineDataSet dataSet3=new LineDataSet(entriesPV,"PV");
     dataSet3.setColor(Color.RED);
 
-
     dataset.setDrawCubic(true);
     dataset2.setDrawCubic(true);
     dataSet3.setDrawCubic(true);
 
     ArrayList <ILineDataSet> lineDataSets=new ArrayList<>();
-    ArrayList labels = new ArrayList<String>();
 
-    labels.add("Periodo 0");
-    labels.add("Periodo 1");
-    labels.add("Periodo 2");
-    labels.add("Periodo 3");
-    labels.add("Periodo 4");
-    labels.add("Periodo 5");
-    labels.add("Periodo 6");
     lineDataSets.add(dataset);
     lineDataSets.add(dataset2);
     lineDataSets.add(dataSet3);
@@ -249,11 +156,8 @@ public  void graficar(View view){
     lineChart.setDoubleTapToZoomEnabled(true);
     lineChart.setDrawBorders(true);
 
-
     lineChart.setData(new LineData(entriesRange,lineDataSets));
     //lineChart.setData(data2);
-
-
 
     lineChart.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -262,15 +166,7 @@ public  void graficar(View view){
           //  Toast.makeText(getContext(),lineChart.getX()+"__"+lineChart.getX(),Toast.LENGTH_LONG).show();
         }
     });
-
-
-
 }
-
-
-
-
-
     private static String convierteFecha(String stringFechaEntrada, String formatoEntrada, String formatoSalida){
         Log.i("TAG", "stringFechaEntrada :" +  stringFechaEntrada);
         //Definimos formato del string que ingresamos.
@@ -296,30 +192,6 @@ public  void graficar(View view){
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_periodos.setAdapter(dataAdapter);
     }
-
-
-  /*  public void AddValuesToBARENTRY(){
-        BARENTRY.add(new BarEntry(2f, 0));
-        BARENTRY.add(new BarEntry(4f, 1));
-        BARENTRY.add(new BarEntry(6f, 2));
-        BARENTRY.add(new BarEntry(8f, 3));
-        BARENTRY.add(new BarEntry(7f, 4));
-        BARENTRY.add(new BarEntry(3f, 5));
-
-    }*/
-
-  /*  public void AddValuesToBarEntryLabels(){
-
-        BarEntryLabels.add("January");
-        BarEntryLabels.add("February");
-        BarEntryLabels.add("March");
-        BarEntryLabels.add("April");
-        BarEntryLabels.add("May");
-        BarEntryLabels.add("June");
-
-    }*/
-
-
     /*Metodo utilizado para obtener CV PV EV*/
     public List<Periodo> getCVPVEV(int idProyecto, int idPeriodo,final Context c){
         JSONObject jsonObjCurvaScostos = new JSONObject();
@@ -451,8 +323,6 @@ public  void graficar(View view){
                             periodoList.add(periodo);
                         }
                         spinnerd(periodoList, view);
-                      //  retornArray(periodoList);
-                      //  getCausales(c);
                     }else{
                         Snackbar.make(getView(),"No tienes periodos", Snackbar.LENGTH_LONG).show();
                     }

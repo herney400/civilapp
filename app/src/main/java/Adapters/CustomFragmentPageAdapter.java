@@ -5,7 +5,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.n550j.myapplication.fragments.FragmentAvanceCostoReal;
+import com.example.n550j.myapplication.fragments.FragmentCausals;
 import com.example.n550j.myapplication.fragments.FragmentCurvadeCostos;
+import com.example.n550j.myapplication.fragments.FragmentIndiceDesempeno;
 import com.example.n550j.myapplication.fragments.FragmentInformePorPeriodo;
 
 /**
@@ -14,7 +16,7 @@ import com.example.n550j.myapplication.fragments.FragmentInformePorPeriodo;
 
 public class CustomFragmentPageAdapter extends FragmentPagerAdapter {
     private static final String TAG = CustomFragmentPageAdapter.class.getSimpleName();
-    private static final int FRAGMENT_COUNT = 3;
+    private static final int FRAGMENT_COUNT = 5;
     int idProyecto;
     public CustomFragmentPageAdapter(FragmentManager fm, int idProeyecto) {
         super(fm);
@@ -33,6 +35,12 @@ public class CustomFragmentPageAdapter extends FragmentPagerAdapter {
                 FragmentCurvadeCostos fragmentCurvadeCostos=FragmentCurvadeCostos.newInstance(idProyecto);
 
                 return  fragmentCurvadeCostos;///
+            case 3:
+                FragmentIndiceDesempeno fragmentIndiceDesempeno= FragmentIndiceDesempeno.newInstance(idProyecto);
+                return  fragmentIndiceDesempeno;
+            case 4:
+                FragmentCausals fragmentCausals=FragmentCausals.newInstance(idProyecto);
+                return  fragmentCausals;
         }
         return null;
     }
@@ -51,6 +59,8 @@ public class CustomFragmentPageAdapter extends FragmentPagerAdapter {
                 return "CURVA S DE COSTOS";
             case 3:
                 return "INDICE DE DESEMPEÑO";
+            case 4:
+                return "CAUSALES DE NO CUMPLIMIENTO";
         }
         return null;
     }

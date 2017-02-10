@@ -1,0 +1,47 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.n550j.myapplication.fragments.FragmentCausals">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:fabSize="mini"
+
+        android:layout_gravity="right|bottom"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:id="@+id/floatingActionButton4" />
+
+
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <com.github.mikephil.charting.charts.HorizontalBarChart
+                    android:id="@+id/chartline"
+                    android:layout_marginTop="50dp"
+                    android:layout_width="386dp"
+                    android:layout_height="300dp"
+                    android:paddingRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+
+</FrameLayout>

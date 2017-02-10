@@ -18,6 +18,11 @@ public class Constantes {
     public static final String  URL_CAUSALES ="http://74.208.113.25/api/causals";
     public static final String  URL_FINALIZAR ="http://74.208.113.25/api/CausalsActivities";
     public static final String  URL_CV_PV ="http://74.208.113.25/api/scurve?idproject=";
+    public static final String  URL_SPI_CPI_PCIB ="http://74.208.113.25/api/PerformanceIndicators?idproject=";
+    public static final String  URL_CAUSALES_SUM ="http://74.208.113.25/api/NonComplianceCauses?idproject=";
+
+
+
 
 
 

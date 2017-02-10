@@ -67,7 +67,14 @@ public class MainActivity extends AppCompatActivity {
 
                         boolean fragmentTransaction = false;
                         Fragment fragment = null;
-
+                        fragment = new FragmentProyecto();
+                        fragmentTransaction = true;
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.content_frame, fragment)
+                                .commit();
+                        menuItem.setChecked(true);
+                        getSupportActionBar().setTitle(menuItem.getTitle());
+                        
                         switch (menuItem.getItemId()) {
                             case R.id.menu_seccion_1:
                                 fragment = new FragmentProyecto();
