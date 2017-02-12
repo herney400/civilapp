@@ -20,6 +20,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.error.VolleyError;
+import com.android.volley.request.JsonArrayRequest;
 import com.android.volley.request.JsonObjectRequest;
 import com.android.volley.request.JsonRequest;
 import com.android.volley.toolbox.Volley;
@@ -71,7 +72,7 @@ public class homeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 login();
-                startAcitivityMain("usuario", 11, "usuario@gmail.com");
+             //   startAcitivityMain("usuario", 11, "usuario@gmail.com");
             }
         });
         textViewCreateCount.setOnClickListener(new View.OnClickListener() {
@@ -109,11 +110,16 @@ public class homeActivity extends AppCompatActivity {
                 try {
 
                     if(response.getBoolean("Status")){
-                       JSONObject jo= response.getJSONObject("usuario");
-                       int idUser=  jo.getInt("IDUSUARIO");
-                       String name= jo.getString("NOMBRE");
-                       String email= jo.getString("EMAIL");
+
+                       //JSONObject jo= response.getJSONObject("usuario");
+                       JSONArray  jo=response.getJSONArray("Users");
+                        JSONObject joo=jo.getJSONObject(0);
+
+                       int idUser=  joo.getInt("IDUSUARIO");
+                       String name= joo.getString("NOMBRE");
+                       String email= joo.getString("EMAIL");
                        startAcitivityMain(name,idUser,email);
+
                     }else{
                         dialogAlertaP("No existe", context ,"Oops");
                     }

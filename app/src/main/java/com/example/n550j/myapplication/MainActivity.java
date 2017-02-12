@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar appbar;
     private DrawerLayout drawerLayout;
     private NavigationView navView;
-
-    String id,email,userName;
+ int id;
+    String email,userName;
 
 
 /*Un cambio*/
@@ -136,8 +136,8 @@ public class MainActivity extends AppCompatActivity {
             case 0:
                 fragmentManager =getSupportFragmentManager();
                 fragmentTransaction=fragmentManager.beginTransaction();
-                fragment = new FragmentProyecto();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+                FragmentProyecto fragmento = FragmentProyecto.newInstance(id);
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragmento).commit();
                 break;
 
            // getSupportActionBar().setTitle(menuItem.getTitle());
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void obtenerDatosdeUsuario(){
        userName = getIntent().getExtras().getString("userName");
-       id       = getIntent().getExtras().getString("id");
+       id       = getIntent().getExtras().getInt("id");
        email    = getIntent().getExtras().getString("email");
     }
 

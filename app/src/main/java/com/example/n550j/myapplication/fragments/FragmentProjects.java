@@ -62,7 +62,7 @@ public class FragmentProjects extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String userName;
-    private int idUser;
+      int idUser;
     private String email;
 
 
@@ -88,11 +88,11 @@ public class FragmentProjects extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
 
-    public static FragmentProjects newInstance(String useName, String idUser ,String email) {
+    public static FragmentProjects newInstance(String useName, int idUser ,String email) {
         FragmentProjects fragment = new FragmentProjects();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1_USERNAME, useName);
-        args.putString(ARG_PARAM2_IDUSER, idUser);
+        args.putInt(ARG_PARAM2_IDUSER, idUser);
         args.putString(ARG_PARAM3_EMAIL, email);
 
         fragment.setArguments(args);
@@ -142,8 +142,8 @@ public class FragmentProjects extends Fragment {
 
        // mAdapter=new RecyclerAdapter(items);
        // recyclerViewProject.setAdapter(mAdapter);
-        int usu=11;
-        getProyects(usu, getContext());
+        int usu=14;
+        getProyects(idUser, getContext());
         return view;
 
     }

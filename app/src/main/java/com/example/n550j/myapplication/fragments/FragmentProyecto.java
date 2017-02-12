@@ -55,7 +55,7 @@ public class FragmentProyecto extends Fragment {
     Button buttonCargarArchvo;
     FloatingActionButton floatingActionButton;
     public static String BASE_URL = "http://74.208.113.25/api/upload";
-
+    static final String ARG_PARAM2_IDUSER = "param2";
     //"http://74.208.113.25/api/projects"
     EditText editTextNameProject, editTextNumbreProject, editTextCity,editTextDirection;
     String strNmaeProject,strNumberProject, strCity, strDirection;
@@ -69,6 +69,23 @@ public class FragmentProyecto extends Fragment {
 
     public FragmentProyecto() {
         // Required empty public constructor
+    }
+
+    public static FragmentProyecto newInstance( int idUser ) {
+        FragmentProyecto fragment = new FragmentProyecto();
+        Bundle args = new Bundle();
+        args.putInt(ARG_PARAM2_IDUSER, idUser);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+
+            idUser = getArguments().getInt(ARG_PARAM2_IDUSER);
+        }
     }
 
     @Override
