@@ -99,13 +99,16 @@ public class homeActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        String URL = Constantes.URL_START_SESSIOn;
-        JsonRequest request = new JsonObjectRequest(Request.Method.POST, URL, jsonObjStartSession, new Response.Listener<JSONObject>() {
+        // 74.208.113.25/api/Users?email={email}&password={password}
+
+        String URL = Constantes.URL_START_SESSIOn+stringemail+"&"+"password="+stringPassword;
+
+        JsonRequest request = new JsonObjectRequest(Request.Method.GET, URL,null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
 
-                    if(response.getBoolean("estado")){
+                    if(response.getBoolean("Status")){
                        JSONObject jo= response.getJSONObject("usuario");
                        int idUser=  jo.getInt("IDUSUARIO");
                        String name= jo.getString("NOMBRE");

@@ -60,9 +60,9 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
                 FragmentAvanceCostoReal fragmentAvanceCostoReal=new FragmentAvanceCostoReal();
 
                 if(porcentaje==100.0){
-                    fragmentAvanceCostoReal.updateActivity(actividads.get(position).getIdActividad(),1,porcentaje,costoReal,context);
+                    fragmentAvanceCostoReal.updateActivity(idPeriodo,actividads.get(position).getIdActividad(),1,porcentaje,costoReal,context);
                 }else {
-                    fragmentAvanceCostoReal.updateActivity(actividads.get(position).getIdActividad(),0,porcentaje,costoReal,context);
+                    fragmentAvanceCostoReal.updateActivity(idPeriodo,actividads.get(position).getIdActividad(),0,porcentaje,costoReal,context);
                 }
 
 
@@ -74,7 +74,7 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
 
 
                 actividadesViewHolder.createSimpleDialog(actividads.get(position).getIdActividad() ).show();
-                Toast.makeText(context,"Finalizada :"+actividads.get(position).getNombreActividad()+""+itemsSeleccionados.size(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(context,"Finalizada :"+actividads.get(position).getNombreActividad()+""+itemsSeleccionados.size(),Toast.LENGTH_LONG).show();
                 Log.e("---->",""+itemsSeleccionados.size());
             }
         });
@@ -82,17 +82,18 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
     List<Actividad> actividads;
     List<String> causales;
     CharSequence[]  causals;
-
+    int idPeriodo;
     @Override
     public int getItemCount() {
         return actividads.size();
     }
 
-    public  AdapterActividades(List<Actividad> actividads, CharSequence[] causal,OnItemClickListener listener, Context context){
+    public  AdapterActividades(int idPeriodo,List<Actividad> actividads, CharSequence[] causal,OnItemClickListener listener, Context context){
         this.actividads=actividads;
         this.escucha=listener;
         this.context=context;
         this.causals=causal;
+        this.idPeriodo=idPeriodo;
     }
     public  AdapterActividades(CharSequence[] items){
         //this.causals=new CharSequence[items.length];
@@ -189,14 +190,14 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            Toast.makeText( context, "Checks seleccionados:(" + itemsSeleccionados.size() + ")", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText( context, "Checks seleccionados:(" + itemsSeleccionados.size() + ")", Toast.LENGTH_SHORT).show();
                         }
                     }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
                 }
-            }). setTitle("Escoja las causale")
+            }). setTitle("Elija las causales de no cumplimiento")
                     .setMultiChoiceItems(causals, null, new DialogInterface.OnMultiChoiceClickListener()
                       {
                         @Override

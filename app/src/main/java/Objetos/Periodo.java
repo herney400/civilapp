@@ -63,9 +63,8 @@ public class Periodo {
     }
 
     public String toString() {
-        return fechaInicial;
-
-
+        String[] fechanueva= fechaInicial.split("T");
+        return "PERIODO : "+ fechanueva[0];
     }
 
     public void setFechaInicial(String fechaInicial) {

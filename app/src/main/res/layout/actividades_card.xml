@@ -3,7 +3,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="fill_parent"
-    android:layout_height="300dp"
+    android:layout_height="350dp"
     android:layout_margin="5dp"
     card_view:cardCornerRadius="2dp"
     card_view:contentPadding="10dp"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:textStyle="bold"
-            android:text="Duraciòn"
+            android:text="Duraciòn (dias)"
             android:layout_below="@+id/txtActividad"
             android:layout_toStartOf="@+id/txv_EV" />
 
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:textStyle="bold"
-            android:text="Costo programado"
+            android:text="Costo programado $"
             android:layout_below="@+id/txv_EV"
             android:layout_alignStart="@+id/txduracion" />
 
@@ -63,7 +63,8 @@
             android:text="Costo"
             android:layout_alignBaseline="@+id/txtcosto"
             android:layout_alignBottom="@+id/txtcosto"
-            android:layout_toEndOf="@+id/txtcosto" />
+            android:layout_toEndOf="@+id/txtcosto"
+            android:layout_alignStart="@+id/costoRealPV" />
 
         <TextView
             android:id="@+id/txv_EV"
@@ -76,24 +77,13 @@
             android:layout_below="@+id/nombreActividad"
             android:layout_toEndOf="@+id/txtActividad" />
 
-        <EditText
-            android:id="@+id/costoRealPV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textStyle="bold"
-            android:text="Costo"
-            android:layout_alignBaseline="@+id/txvcostoReal"
-            android:layout_alignBottom="@+id/txvcostoReal"
-            android:layout_toEndOf="@+id/txtcosto" />
-
         <TextView
             android:id="@+id/txvcostoReal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:textStyle="bold"
-            android:text="Costo Real"
+            android:text="Costo Real $"
             android:layout_below="@+id/txtcosto"
             android:layout_alignStart="@+id/txtcosto" />
 
@@ -104,6 +94,7 @@
             android:padding="10dp"
             android:textStyle="bold"
             android:text="%"
+            android:maxLength="4"
             android:layout_alignBaseline="@+id/txtvarianzaSV"
             android:layout_alignBottom="@+id/txtvarianzaSV"
             android:layout_toEndOf="@+id/txtvarianzaSV" />
@@ -118,25 +109,6 @@
             android:layout_below="@+id/costoRealPV"
             android:layout_alignStart="@+id/txvcostoReal" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Actualizar"
-            android:id="@+id/btn_actualizar"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_marginEnd="13dp"
-            android:layout_below="@+id/edtporcentajeAvance"
-            android:layout_alignParentEnd="true" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="finalizar"
-            android:id="@+id/btn_finalizar"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_below="@+id/edtporcentajeAvance"
-            android:layout_alignEnd="@+id/txv_EV" />
-
         <TextView
             android:text="%"
             android:layout_width="wrap_content"
@@ -144,7 +116,57 @@
             android:id="@+id/textView"
             android:layout_alignBaseline="@+id/edtporcentajeAvance"
             android:layout_alignBottom="@+id/edtporcentajeAvance"
-            android:layout_alignEnd="@+id/btn_actualizar" />
+            android:layout_alignEnd="@+id/nombreActividad" />
+
+        <EditText
+            android:id="@+id/costoRealPV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:text="Costo"
+            android:maxLength="10"
+            android:layout_below="@+id/txtcosto"
+            android:layout_alignStart="@+id/txv_EV"
+            android:layout_alignEnd="@+id/textView" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Finalizar actividad"
+                android:textColor="@color/colorAccent"
+                android:id="@+id/btn_finalizar"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_below="@+id/edtporcentajeAvance"
+                android:layout_alignEnd="@+id/costoRealAC"
+                android:layout_weight="0.21" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Actualizar"
+                android:id="@+id/btn_actualizar"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_marginEnd="13dp"
+                android:layout_marginLeft="30dp"
+                android:textColor="@color/colorAccent"
+                android:elevation="2dp"
+
+                android:layout_marginStart="10dp"
+                android:layout_below="@+id/edtporcentajeAvance"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/btn_finalizar"
+                android:layout_weight="0.75" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 

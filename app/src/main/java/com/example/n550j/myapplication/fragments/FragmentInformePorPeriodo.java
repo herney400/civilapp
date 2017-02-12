@@ -227,7 +227,7 @@ public class FragmentInformePorPeriodo extends Fragment implements AdapterView.O
         Periodo p= (Periodo) spinner_periodos.getSelectedItem();
         //getActivida(p.getIdPerido(),idProyecto,getContext());
         getInformePeriodo(p.getIdPerido(),idProyecto,getContext());
-        Toast.makeText(getContext(),"El periodo seleccionado es"+p.getIdPerido()+"Id proy"+idProyecto,Toast.LENGTH_LONG).show();
+
 
     }
 

@@ -26,6 +26,7 @@ import com.android.volley.request.JsonRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.n550j.myapplication.R;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -199,6 +200,7 @@ public class FragmentIndiceDesempeno extends Fragment implements AdapterView.OnI
                         JSONArray jarraySPI=response.getJSONArray("SPI");
                         JSONArray jarrayCPI=response.getJSONArray("CPI");
                         JSONArray jarrayPCIB=response.getJSONArray("PCIB");
+
                         parseJsonSPI(jarraySPI);
                         parseJsonCPI(jarrayCPI);
                         parseJsonPCIB(jarrayPCIB);
@@ -249,6 +251,7 @@ public class FragmentIndiceDesempeno extends Fragment implements AdapterView.OnI
     public ArrayList<String> parseJsonPCIB(JSONArray jsonArrayEV){
         entriesPCIB.clear();
         for (int i=0;i<jsonArrayEV.length();i++){
+
             try {
                 entriesPCIB.add(new Entry(jsonArrayEV.getInt(i),i));
             } catch (JSONException e) {
@@ -284,6 +287,8 @@ public class FragmentIndiceDesempeno extends Fragment implements AdapterView.OnI
         barChart.clear();
 
         barChart.animateY(3000);
+        barChart.setScaleX(1);
+        barChart.setScaleY(1);
         LineChart lineChart = (LineChart) view.findViewById(R.id.chart1);
         lineChart.clear();
 
@@ -297,6 +302,11 @@ public class FragmentIndiceDesempeno extends Fragment implements AdapterView.OnI
         dataset.setDrawCubic(true);
         dataset2.setDrawCubic(true);
         dataSet3.setDrawCubic(true);
+
+
+        lineChart.setScaleMinima(1, 1);
+        lineChart.getAxisLeft().setAxisMaxValue(5f);
+        lineChart.getAxisLeft().setAxisMinValue(-2f);
 
         ArrayList <ILineDataSet> lineDataSets=new ArrayList<>();
 
@@ -352,7 +362,7 @@ public class FragmentIndiceDesempeno extends Fragment implements AdapterView.OnI
         idPeriodo=p.getIdPerido();
       //  fechaPeriodo=p.getFechaFinal();
         getSPI_CPI_PCIB(idProyecto,idPeriodo,getContext());
-        Toast.makeText(getContext(),"El periodo seleccionado es"+p.getIdPerido()+"Id proy"+idProyecto,Toast.LENGTH_LONG).show();
+      //  Toast.makeText(getContext(),"El periodo seleccionado es"+p.getIdPerido()+"Id proy"+idProyecto,Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -58,6 +58,7 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
     Context context=getContext();
     protected ArrayAdapter<Periodo> adapter;
     SpinnerAdapter spinnerAdapter;
+    int idPeriod;
     List<Periodo> periodoListPublico=new ArrayList<Periodo>();
     private RecyclerView recyclerViewActividades;
     private RecyclerView.Adapter mAdapter;
@@ -122,7 +123,7 @@ public class FragmentAvanceCostoReal extends Fragment implements AdapterView.OnI
     public  void startRecyclerView(List<Actividad> actividads){
         List<String> copia=new ArrayList<>();
         copia=CausalList;
-        recyclerViewActividades.setAdapter(new AdapterActividades(actividads,causa,new AdapterActividades.OnItemClickListener(){
+        recyclerViewActividades.setAdapter(new AdapterActividades(idPeriod, actividads,causa,new AdapterActividades.OnItemClickListener(){
             @Override
             public void onItemClick(Actividad item) {
                 FragmentMisProyectos fragment=new FragmentMisProyectos();
@@ -268,8 +269,11 @@ public CharSequence[] parseJSON(JSONArray jsonArray) throws JSONException {
                 try {
                     if(response.getBoolean("Status")){
                         JSONArray ja= response.getJSONArray("Actividades");
+                        JSONArray jaActividade_Periodo=response.getJSONArray("Actividades_Periodos");
                         for(int i=0;i<ja.length();i++){
                             JSONObject jsonObjectActividades=ja.getJSONObject(i);
+                            JSONObject jsonObjectActividadesPeriodos=jaActividade_Periodo.getJSONObject(i);
+
                             Actividad actividad=new Actividad();
                             actividad.setIdActividad(jsonObjectActividades.getInt("IDACTIVIDAD"));
                             actividad.setIdPoyecto(jsonObjectActividades.getInt("IDPROYECTO"));
@@ -281,12 +285,15 @@ public CharSequence[] parseJSON(JSONArray jsonArray) throws JSONException {
                             actividad.setHolguralibre(jsonObjectActividades.getInt("HOLGURA_LIBRE"));
                             actividad.setPorcentaje(jsonObjectActividades.getDouble("PORCENTAJE_AVANCE"));
                             actividad.setFinalizacionCompleta(jsonObjectActividades.getBoolean("FINALIZACION_COMPLETA"));
-                            actividad.setCostoReal(jsonObjectActividades.getDouble("COSTO_REAL"));
+                          //actividad.setCostoReal(jsonObjectActividades.getDouble("COSTO_REAL"));
                             actividad.setFecha_inicial("2017-01-22T17:46:45.77");
                             actividad.setFecha_final("2017-01-22T17:46:45.77");
                             actividad.setFecha_creacion(jsonObjectActividades.getString("FECHA_CREACION"));
+                            actividad.setCostoReal(jsonObjectActividadesPeriodos.getDouble("COSTO_REAL"));
                             actividadList.add(actividad);
                         }
+
+
                         startRecyclerView(actividadList);
 
                     }else{
@@ -308,20 +315,25 @@ public CharSequence[] parseJSON(JSONArray jsonArray) throws JSONException {
         return  periodoList;
     }
 
-    public boolean updateActivity(int idActividad , int finalizacionCompleta, double porcentaje_avance ,double costoReal, final Context c){
+    public boolean updateActivity(int idPeriodo,int idActividad , int finalizacionCompleta, double porcentaje_avance ,double costoReal, final Context c){
 
         JSONObject jsonObjAcitivdad = new JSONObject();
         RequestQueue queue = Volley.newRequestQueue(c);
         queue.getCache().clear();
         try {
+
             jsonObjAcitivdad.put("idActividad", idActividad);
             jsonObjAcitivdad.put("finalizacion_completa", finalizacionCompleta);
             jsonObjAcitivdad.put("porcentaje_avance", porcentaje_avance);
             jsonObjAcitivdad.put("costo_real",costoReal);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        String URL = Constantes.URL_UPDATE_ACTIVIDADES;
+//        Periodo p= (Periodo) spinner_periodos.getSelectedItem();
+
+        String URL = Constantes.URL_UPDATE_ACTIVIDADES+"?idPeriod="+idPeriodo;
+
         JsonRequest request = new JsonObjectRequest(Request.Method.POST, URL, jsonObjAcitivdad, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -440,8 +452,10 @@ public CharSequence[] parseJSON(JSONArray jsonArray) throws JSONException {
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             String item=parent.getItemAtPosition(position).toString();
             Periodo p= (Periodo) spinner_periodos.getSelectedItem();
-            getActivida(p.getIdPerido(),idProyecto,getContext());
-            Toast.makeText(getContext(),"El periodo seleccionado es"+p.getIdPerido()+"Id proy"+idProyecto,Toast.LENGTH_LONG).show();
+            idPeriod=p.getIdPerido();
+            getActivida(idPeriod,idProyecto,getContext());
+
+
     }
 
     @Override

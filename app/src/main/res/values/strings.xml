@@ -18,13 +18,13 @@
 
     <!-- Strings related a FragmentProject-->
 
-    <string name="projectName">Nombre Proyecto</string>
-    <string name="contracNumber">Numero Contrato</string>
+    <string name="projectName">Nombre del Proyecto</string>
+    <string name="contracNumber">Numero del Contrato</string>
     <string name="cityProject">Ciudad</string>
-    <string name="directionProject">Direccion proyectoto</string>
+    <string name="directionProject">Direccion del proyecto</string>
 
-
-    <string name="app_name">Civilapp</string>
+    <string name="descripcion">Ingrese los avances de cada actividad por periodo</string>
+    <string name="app_name">EVM</string>
     <string name="title_mainactivity">Main Activity</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to sections -->

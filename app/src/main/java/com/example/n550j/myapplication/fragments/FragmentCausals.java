@@ -137,10 +137,7 @@ public class FragmentCausals extends Fragment {
                     if(response.getBoolean("Status")){
                         JSONArray jarrayCausale=response.getJSONArray("Causals");
                         JSONArray jarraycount=response.getJSONArray("Count");
-                        ;
-                       ;
                         graficar(getView(), parseJsonCounts(jarraycount),parseJsonCausale(jarrayCausale));
-
                     }else{
                         Snackbar.make(getView(),"No tienes datos", Snackbar.LENGTH_LONG).show();
                     }

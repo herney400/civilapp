@@ -1,6 +1,8 @@
 package com.example.n550j.myapplication;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-
+        setFragment(0);
         obtenerDatosdeUsuario();
         /*
         //Eventos del Drawer Layout
@@ -69,30 +71,26 @@ public class MainActivity extends AppCompatActivity {
                         Fragment fragment = null;
                         fragment = new FragmentProyecto();
                         fragmentTransaction = true;
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.content_frame, fragment)
-                                .commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
                         menuItem.setChecked(true);
                         getSupportActionBar().setTitle(menuItem.getTitle());
                         
                         switch (menuItem.getItemId()) {
                             case R.id.menu_seccion_1:
-                                fragment = new FragmentProyecto();
+                                setFragment(0);
+                               /* fragment = new FragmentProyecto();
                                 fragmentTransaction = true;
-                                getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.content_frame, fragment)
-                                        .commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();*/
                                 menuItem.setChecked(true);
                                 getSupportActionBar().setTitle(menuItem.getTitle());
                                 break;
 
                             case R.id.menu_seccion_2:
+                                setFragment(1);
                                // fragment = new FragmentProjects.newInstance(id,email);
-                                FragmentProjects f=FragmentProjects.newInstance(userName,id,email);
+                               /* FragmentProjects f=FragmentProjects.newInstance(userName,id,email);
                                 fragmentTransaction = true;
-                                getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.content_frame, f)
-                                        .commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();*/
                                 menuItem.setChecked(true);
                                 getSupportActionBar().setTitle(menuItem.getTitle());
                                 break;
@@ -127,6 +125,34 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+    }
+
+    public void setFragment(int positio){
+        FragmentManager fragmentManager;
+        FragmentTransaction fragmentTransaction;
+        Fragment fragment = null;
+        switch(positio){
+
+            case 0:
+                fragmentManager =getSupportFragmentManager();
+                fragmentTransaction=fragmentManager.beginTransaction();
+                fragment = new FragmentProyecto();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+                break;
+
+           // getSupportActionBar().setTitle(menuItem.getTitle());
+            case 1:
+                fragmentManager=getSupportFragmentManager();
+                fragmentTransaction=fragmentManager.beginTransaction();
+                FragmentProjects f=FragmentProjects.newInstance(userName,id,email);
+                //fragmentTransaction = true;
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
+                break;
+
+
+        }
+
+
     }
 
 

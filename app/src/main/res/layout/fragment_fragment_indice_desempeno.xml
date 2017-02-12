@@ -32,15 +32,17 @@
                     android:layout_marginLeft="10dp"
                     />
 
-                <!--             <com.jjoe64.graphview.GraphView
-                                android:id="@+id/chart1"
-                                android:layout_width="386dp"
-                                android:layout_height="300dp"
-                                android:paddingRight="10dp"
+                <ImageView
 
-                                android:layout_marginTop="70dp"
+                    android:gravity="bottom"
+                    android:layout_width="339dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/textView4"
+                    android:src="@drawable/indicedesempeno"
+                   />
 
-                                />-->
+
 
 
             </LinearLayout>
@@ -62,6 +64,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.56"
         android:orientation="horizontal"
+
         android:weightSum="1">
 
         <Spinner

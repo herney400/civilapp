@@ -60,7 +60,7 @@ public class CustomFragmentPageAdapter extends FragmentPagerAdapter {
             case 3:
                 return "INDICE DE DESEMPEÑO";
             case 4:
-                return "CAUSALES DE NO CUMPLIMIENTO";
+                return "GRÁFICA DE COSTO Y PROGRAMA";
         }
         return null;
     }

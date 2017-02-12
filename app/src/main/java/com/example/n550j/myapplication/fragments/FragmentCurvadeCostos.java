@@ -350,7 +350,7 @@ public class FragmentCurvadeCostos extends Fragment implements AdapterView.OnIte
         idPeriodo=p.getIdPerido();
         fechaPeriodo=p.getFechaFinal();
         getCVPVEV(idProyecto,idPeriodo,getContext());
-        Toast.makeText(getContext(),"El periodo seleccionado es"+p.getIdPerido()+"Id proy"+idProyecto,Toast.LENGTH_LONG).show();
+       // Toast.makeText(getContext(),"El periodo seleccionado es"+p.getIdPerido()+"Id proy"+idProyecto,Toast.LENGTH_LONG).show();
     }
 
     @Override
