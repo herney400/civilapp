@@ -15,10 +15,12 @@ import android.widget.Toast;
 
 import com.example.n550j.myapplication.R;
 import com.example.n550j.myapplication.fragments.FragmentAvanceCostoReal;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 
 import org.json.JSONException;
 
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -132,10 +134,12 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
         }*/
 
         public  void bind(final Actividad actividad, OnItemClickListener listener, Context context){
+            DecimalFormat format=new DecimalFormat("###,###.##");
+
             txtmombreActivida.setText(actividad.getNombreActividad());
             txtduracionActivida.setText(actividad.getDiasduracion()+"");
-            txtcostoProgramado.setText(""+actividad.getCostoTotal());
-            edtcostoReal.setText(actividad.getCostoReal()+"");
+            txtcostoProgramado.setText(""+format.format(actividad.getCosto_asignado()));
+            edtcostoReal.setText(""+format.format(actividad.getCostoReal()));
             edtporcentaje.setText(actividad.getPorcentaje()+"");
 
            /* itemView.setOnClickListener(new View.OnClickListener() {

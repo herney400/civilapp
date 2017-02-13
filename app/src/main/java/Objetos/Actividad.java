@@ -21,6 +21,15 @@ public class Actividad {
     double costoTotal;
     String fecha_inicial;
     String fecha_final;
+    int costo_asignado;
+    public int getCosto_asignado() {
+        return costo_asignado;
+    }
+
+    public void setCosto_asignado(int costo_asignado) {
+        this.costo_asignado = costo_asignado;
+    }
+
 
     public String getIniciacion_primera() {
         return iniciacion_primera;
@@ -72,12 +81,12 @@ public class Actividad {
 
     String fecha_creacion;
 
-    double costoReal;
+    int costoReal;
 
 
 
 
-    public Actividad(int idActividad, int idPoyecto, String nombreActividad, int diasduracion, double costoTotal, double costoReal, int holguralibre, boolean finalizacionCompleta, double porcentaje) {
+    public Actividad(int idActividad, int idPoyecto, String nombreActividad, int diasduracion, double costoTotal, int costoReal, int holguralibre, boolean finalizacionCompleta, double porcentaje) {
         this.idActividad = idActividad;
         this.idPoyecto = idPoyecto;
         this.nombreActividad = nombreActividad;
@@ -99,11 +108,11 @@ public class Actividad {
         this.porcentaje = porcentaje;
     }
 
-    public double getCostoReal() {
+    public int getCostoReal() {
         return costoReal;
     }
 
-    public void setCostoReal(double costoReal) {
+    public void setCostoReal(int costoReal) {
         this.costoReal = costoReal;
     }
 

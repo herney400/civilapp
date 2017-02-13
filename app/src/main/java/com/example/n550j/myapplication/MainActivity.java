@@ -41,8 +41,9 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        setFragment(0);
+
         obtenerDatosdeUsuario();
+        setFragment(0);
         /*
         //Eventos del Drawer Layout
         drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
@@ -157,9 +158,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void obtenerDatosdeUsuario(){
-       userName = getIntent().getExtras().getString("userName");
-       id       = getIntent().getExtras().getInt("id");
-       email    = getIntent().getExtras().getString("email");
+       this.userName = getIntent().getExtras().getString("userName");
+      this.id       = getIntent().getExtras().getInt("id");
+       this.email    = getIntent().getExtras().getString("email");
     }
 
     @Override

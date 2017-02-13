@@ -27,6 +27,7 @@ import com.android.volley.error.VolleyError;
 import com.android.volley.request.JsonObjectRequest;
 import com.android.volley.request.JsonRequest;
 import com.android.volley.request.SimpleMultiPartRequest;
+import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.Volley;
 import com.example.n550j.myapplication.R;
 import com.github.mikephil.charting.charts.BarChart;
@@ -40,6 +41,7 @@ import java.lang.reflect.Array;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -61,6 +63,7 @@ public class FragmentProyecto extends Fragment {
     String strNmaeProject,strNumberProject, strCity, strDirection;
     String  userName,  email;
     int idUser;
+    int idUauario;
 
     static final int PICK_IMAGE_REQUEST = 1;
     private static final int FILE_SELECT_CODE = 0;
@@ -84,7 +87,7 @@ public class FragmentProyecto extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
 
-            idUser = getArguments().getInt(ARG_PARAM2_IDUSER);
+            idUauario = getArguments().getInt(ARG_PARAM2_IDUSER);
         }
     }
 
@@ -104,7 +107,11 @@ public class FragmentProyecto extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FileUpload(filePath);
+                try {
+                    FileUpload(filePath);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
             }
         });
@@ -129,14 +136,15 @@ public class FragmentProyecto extends Fragment {
         strNumberProject=editTextNumbreProject.getText().toString();
         strCity =editTextCity.getText().toString();
         strDirection=editTextDirection.getText().toString();
-        createProject(strNmaeProject,strNumberProject,strCity,strDirection, urlFile);
+        createProject(idUauario,strNmaeProject,strNumberProject,strCity,strDirection, urlFile);
     }
 
-    public void createProject(String strNmaeProject,String strNumberProject, String strCity,String strDirection, String url){
+    public void createProject(int  idUauario,String strNmaeProject,String strNumberProject, String strCity,String strDirection, String url){
 
         JSONObject jsonObjCreateProject = new JSONObject();
         JSONObject jsonObjectID=new JSONObject();
         RequestQueue queue = Volley.newRequestQueue(getContext());
+        queue.getCache().clear();
         Date today=new  Date();
         String URL = Constantes.URL_CREATE_PROJECT;
         try {
@@ -147,7 +155,7 @@ public class FragmentProyecto extends Fragment {
         }
         try {
             jsonObjCreateProject.put("nombre_proyecto",strNmaeProject);
-            jsonObjCreateProject.put("idusuario",11);
+            jsonObjCreateProject.put("idusuario",idUauario);
             jsonObjCreateProject.put("numero_contrato", strNumberProject);
             jsonObjCreateProject.put("ciudad", strCity);
             jsonObjCreateProject.put("direccion", strDirection);
@@ -190,13 +198,18 @@ public class FragmentProyecto extends Fragment {
     }
 
     /*Metodo qeu utiliza volley para cargar el archivo excel al server*/
-    private void FileUpload(final String imagePath) {
-        Log.e("_URL",""+imagePath);
+    private void FileUpload(final String imagePath) throws InterruptedException {
+        final RequestFuture<SimpleMultiPartRequest> future=RequestFuture.newFuture();
+
         RequestQueue queue= Volley.newRequestQueue(getContext());
+        queue.getCache().clear();
         JSONObject jsonObjStartSession = new JSONObject();
         SimpleMultiPartRequest smr = new SimpleMultiPartRequest(Request.Method.POST, BASE_URL,new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
+
+
                         String rs=response.toString();
                         String remplazo=rs.replace("\"","");
                         String[] sucee=remplazo.split(";");
@@ -215,9 +228,11 @@ public class FragmentProyecto extends Fragment {
                 Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+
         smr.addFile("image", imagePath);
         //smr.addMultipartParam("id", "identi", "dfd");
         queue.add(smr);
+
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

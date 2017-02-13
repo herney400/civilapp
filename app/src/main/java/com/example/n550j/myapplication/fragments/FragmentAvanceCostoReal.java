@@ -285,11 +285,12 @@ public CharSequence[] parseJSON(JSONArray jsonArray) throws JSONException {
                             actividad.setHolguralibre(jsonObjectActividades.getInt("HOLGURA_LIBRE"));
                             actividad.setPorcentaje(jsonObjectActividades.getDouble("PORCENTAJE_AVANCE"));
                             actividad.setFinalizacionCompleta(jsonObjectActividades.getBoolean("FINALIZACION_COMPLETA"));
-                          //actividad.setCostoReal(jsonObjectActividades.getDouble("COSTO_REAL"));
+                           // actividad.setCostoReal(jsonObjectActividades.getDouble("COSTO_REAL"));
                             actividad.setFecha_inicial("2017-01-22T17:46:45.77");
                             actividad.setFecha_final("2017-01-22T17:46:45.77");
                             actividad.setFecha_creacion(jsonObjectActividades.getString("FECHA_CREACION"));
-                            actividad.setCostoReal(jsonObjectActividadesPeriodos.getDouble("COSTO_REAL"));
+                            actividad.setCostoReal(jsonObjectActividadesPeriodos.getInt("COSTO_REAL"));
+                            actividad.setCosto_asignado(jsonObjectActividadesPeriodos.getInt("DINERO_ASIGNADO"));
                             actividadList.add(actividad);
                         }
 
